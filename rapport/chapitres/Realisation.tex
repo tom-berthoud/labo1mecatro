@@ -1,7 +1,7 @@
-\section{Réalisation (partie pratique)}
+\section{Partie Pratique}
 \label{sec:realisation}
 
-\subsection{Objectif de la campagne de mesures}
+\subsection{Objectifs}
 L'objectif est de vérifier expérimentalement les modèles théoriques de la section précédente :
 \begin{itemize}
 \item résistance du primaire par les méthodes 2 fils et 4 fils ;
@@ -10,12 +10,13 @@ L'objectif est de vérifier expérimentalement les modèles théoriques de la se
 \item estimation de \(L_{12}\) et observation de la boucle \(B\)-\(H\) en mode \(x-y\).
 \end{itemize}
 
-\subsection{Appareillage utilisé}
+\subsection{Appareils de mesure utilisés}
 
 \begin{table}[H]
 \centering
 \caption{Instruments de mesure et numéros d'inventaire HEIG-VD}
-\begin{tabular}{llll}
+\small
+\begin{tabular}{@{}p{0.18\textwidth}p{0.19\textwidth}p{0.14\textwidth}p{0.15\textwidth}p{0.26\textwidth}@{}}
 \toprule
 Appareil & Modèle & S/N & Inventaire \\
 \midrule
@@ -23,54 +24,157 @@ Oscilloscope        & Tektronix DPO2014B & ---          & 11E 894-13 \\
 Multimètre (4 fils) & HP 34181A          & US36056912   & 01E-1031   \\
 Alimentation DC     & GW INSTEK PPE-3323 & ---          & 35E 037-07 \\
 Teslamètre          & Hirst GM08         & GM08-1039    & PT9985     \\
+Bobine de Test     & №11               & ---          & --- \\
+Amplificateur & LM12CLK & --- & --- \\
+Sonde de courant & --- & --- & --- \\
 \bottomrule
 \end{tabular}
 \label{tab:appareils}
 \end{table}
 
-\subsection{Résistance du primaire (4.1)}
+\subsection{Résistance du primaire}
 
 \subsubsection{Protocole}
-La résistance \(R_1\) est mesurée au multimètre selon deux méthodes :
-\begin{itemize}
-\item \textbf{2 fils} : la résistance inclut les fils de connexion ; valeur surestimée.
-\item \textbf{4 fils} (méthode Kelvin) : le courant et la tension sont mesurés séparément ; la résistance des fils est éliminée.
-\end{itemize}
-Si la température \(T\neq\SI{20}{\degreeCelsius}\), on corrige :
-\[
-R_1(20)=\frac{R_1(T)}{1+\alpha(T-20)}.
-\]
+La résistance \(R_1\) est mesurée par les méthodes 2 fils et 4 fils.
+ La mesure 4 fils est retenue comme valeur de référence, car elle élimine l'influence des fils de connexion.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\begin{circuitikz}[european, scale=0.78, transform shape,
+  every node/.style={font=\small}]
+% Multimètre
+\draw[thick, rounded corners=3pt] (0,0) rectangle (4,2.2);
+\node at (2,1.55) {\footnotesize Multimètre};
+\node at (2,0.75) {\normalsize $\Omega$};
+% Bornes
+\fill[red!70] (1,0) circle (4pt);
+\fill[black!70] (3,0) circle (4pt);
+\node[below=5pt, font=\scriptsize, red!70!black] at (1,0) {H};
+\node[below=5pt, font=\scriptsize] at (3,0) {L};
+% Fil gauche avec Rfil
+\draw[thick, red!70!black] (1,0) -- (1,-0.6);
+\draw (1,-0.6) to[european resistor, l_=\scriptsize $R_f$] (1,-2.4);
+\draw[thick, red!70!black] (1,-2.4) -- (1,-3);
+% Fil droit avec Rfil
+\draw[thick] (3,0) -- (3,-0.6);
+\draw (3,-0.6) to[european resistor, l^=\scriptsize $R_f$] (3,-2.4);
+\draw[thick] (3,-2.4) -- (3,-3);
+% Bobine
+\draw[thick, rounded corners=3pt] (0.2,-3) rectangle (3.8,-4.5);
+\node at (2,-3.45) {\footnotesize Bobine};
+\node at (2,-4.1) {\footnotesize $R_1$};
+% Titre
+\node[font=\footnotesize\bfseries] at (2,-5.3) {Mesure 2 fils};
+\node[font=\scriptsize] at (2,-6) {$R_\mathrm{mes} = R_1 + 2R_f$};
+\end{circuitikz}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\centering
+\begin{circuitikz}[european, scale=0.78, transform shape,
+  every node/.style={font=\small}]
+% Multimètre
+\draw[thick, rounded corners=3pt] (0,0) rectangle (4.6,2.2);
+\node at (2.3,1.55) {\footnotesize Multimètre (4 fils)};
+\node at (2.3,0.75) {\normalsize $\Omega$};
+% Bornes Source I
+\fill[red!70] (0.6,0) circle (4pt);
+\fill[black!70] (1.7,0) circle (4pt);
+\node[below=5pt, font=\scriptsize, red!70!black] at (0.6,0) {H$_I$};
+\node[below=5pt, font=\scriptsize] at (1.7,0) {L$_I$};
+% Bornes Sense V
+\fill[red!70] (2.9,0) circle (4pt);
+\fill[black!70] (4,0) circle (4pt);
+\node[below=5pt, font=\scriptsize, red!70!black] at (2.9,0) {H$_V$};
+\node[below=5pt, font=\scriptsize] at (4,0) {L$_V$};
+% Accolades Source / Sense
+\draw[decorate, decoration={brace, amplitude=4pt, mirror}]
+  (0.4,2.35) -- (1.9,2.35) node[midway, above=4pt, font=\tiny] {Source $I$};
+\draw[decorate, decoration={brace, amplitude=4pt, mirror}]
+  (2.7,2.35) -- (4.2,2.35) node[midway, above=4pt, font=\tiny] {Sense $V$};
+% Fils Source (trait plein)
+\draw[thick, red!70!black] (0.6,0) -- (0.6,-3);
+\draw[thick] (1.7,0) -- (1.7,-3);
+% Fils Sense (tirets) rejoignent les mêmes points
+\draw[thick, dashed, red!70!black] (2.9,0) -- (2.9,-1.5) -- (0.6,-1.5);
+\draw[thick, dashed] (4,0) -- (4,-1.5) -- (1.7,-1.5);
+% I=0 entre les fils sense
+\node[font=\tiny, gray] at (3.45,-1.0) {$I\!\approx\!0$};
+% Points de contact Kelvin
+\fill (0.6,-3) circle (2.5pt);
+\fill (1.7,-3) circle (2.5pt);
+% Bobine
+\draw[thick, rounded corners=3pt] (-0.2,-3) rectangle (2.5,-4.5);
+\node at (1.15,-3.45) {\footnotesize Bobine};
+\node at (1.15,-4.1) {\footnotesize $R_1$};
+% Titre
+\node[font=\footnotesize\bfseries] at (2.3,-5.3) {Mesure 4 fils (Kelvin)};
+\node[font=\scriptsize] at (2.3,-6) {$R_\mathrm{mes} = R_1$};
+\end{circuitikz}
+\end{minipage}
+\caption{Schémas de mesure de la résistance du primaire. Les fils en tirets (sense) ne portent quasiment aucun courant.}
+\label{fig:schemas_R1}
+\end{figure}
 
 \subsubsection{Résultats}
 
 \begin{table}[H]
 \centering
-\caption{Mesures de résistance du primaire}
-\begin{tabular}{lcccc}
+\caption{Comparaison entre résistance calculée et mesurée}
+\begin{tabular}{lcc}
 \toprule
-Méthode & \(R_1\) mesuré [\si{\ohm}] & Température [\si{\degreeCelsius}] & \(R_1(20)\) [\si{\ohm}] & Écart à \SI{6.65}{\ohm} [\%] \\
+Grandeur & Valeur [\si{\ohm}] & Écart [\%] \\
 \midrule
-2 fils & 6.190 & 20 & 6.190 & $-6.9$ \\
-4 fils & 6.164 & 20 & 6.164 & $-7.3$ \\
+Calculée \(R_{1,\mathrm{th}}\) & 6.65 & 0 \\
+Mesurée (2 fils) & 6.190 & -6.9 \\
+Mesurée (4 fils) & 6.164 & -7.3 \\
 \bottomrule
 \end{tabular}
 \label{tab:R1_mes}
 \end{table}
 
 \subsubsection{Commentaire}
-La mesure 4 fils (\SI{6.164}{\ohm}) est plus fiable car elle s'affranchit de la résistance des fils de connexion. La différence entre les deux méthodes, \(\Delta R=\SI{0.026}{\ohm}\), correspond à environ \SI{75}{cm} de fils de connexion (résistance de fil : \(\approx\SI{0.035}{\ohm/m}\)).
+La mesure 4 fils est la plus fiable.
+ La valeur mesurée reste proche de la valeur calculée, avec un écart de l'ordre de \(7\,\%\).
 
-L'écart à la valeur théorique \(R_{1,\mathrm{th}}=\SI{6.65}{\ohm}\) est de \(-7.3\,\%\). Cet écart s'explique par :
-\begin{itemize}
-\item la tolérance sur le diamètre du fil \(\varnothing\SI{0.4}{mm}\) (\(\pm 2\,\%\) typique) ;
-\item la longueur réelle de fil légèrement inférieure à l'estimation par le périmètre moyen ;
-\item la résistivité du cuivre réel (\(\rho_{20}=\SI{1.72e-8}{\ohm.m}\) nominal, mais dépend de la pureté).
-\end{itemize}
-
-\subsection{Mesure de l'induction \texorpdfstring{\(B=f(I)\)}{B=f(I)} en DC (4.2)}
+\subsubsection{Mesure de l'induction \texorpdfstring{\(B=f(I)\)}{B=f(I)} en DC (4.2)}
 
 \subsubsection{Protocole}
 Une sonde de Hall (teslamètre) est placée dans un entrefer latéral. Une cale étalon règle l'entrefer ; elle reste en place dans les deux entrefers pendant toute la mesure. Le courant DC est balayé de \(\SI{0}{A}\) à \(\SI{0.6}{A}\) par pas de \(\SI{0.1}{A}\).
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[european, scale=0.8, transform shape,
+  every node/.style={font=\small}]
+% Alimentation DC
+\draw[thick, rounded corners=3pt] (0,0) rectangle (3.2,2.5);
+\node at (1.6,1.85) {\footnotesize Alimentation DC};
+\node at (1.6,1.15) {\footnotesize PPE-3323};
+\node at (1.6,0.45) {\scriptsize $0$--$\SI{0.6}{A}$};
+% Bobine + noyau E-E
+\draw[thick, rounded corners=3pt] (5.5,0) rectangle (9.5,2.5);
+\node at (7.5,1.85) {\footnotesize Bobine $N_1$};
+\node at (7.5,1.15) {\footnotesize Noyau E-E};
+% Entrefer
+\draw[thick, {Latex[length=2mm]}-{Latex[length=2mm]}] (9.9,0.4) -- node[right, font=\scriptsize] {$x$} (9.9,2.1);
+% Teslamètre
+\draw[thick, rounded corners=3pt] (12,0) rectangle (15.5,2.5);
+\node at (13.75,1.85) {\footnotesize Teslamètre};
+\node at (13.75,1.15) {\footnotesize Hirst GM08};
+\node at (13.75,0.45) {\scriptsize lecture $B$ [mT]};
+% Fil haut : alim -> bobine
+\draw[thick, red!70!black, -{Latex[length=2.5mm]}] (3.2,1.8) -- (5.5,1.8);
+\node[font=\scriptsize, above] at (4.35,1.8) {$I$};
+% Fil bas : retour
+\draw[thick] (3.2,0.7) -- (5.5,0.7);
+% Sonde Hall
+\draw[thick, dashed, -{Latex[length=2.5mm]}] (12,1.25) -- (9.5,1.25);
+\node[font=\scriptsize, above] at (10.75,1.25) {sonde Hall};
+\end{circuitikz}
+\caption{Schéma de mesure DC --- caractéristique $B=f(I)$.}
+\label{fig:schema_DC}
+\end{figure}
 
 \subsubsection{Résultats}
 
@@ -100,8 +204,12 @@ Une sonde de Hall (teslamètre) est placée dans un entrefer latéral. Une cale 
 \begin{itemize}
 \item Les deux courbes \(B=f(I)\) sont quasi linéaires sur la plage \(0\)–\(\SI{0.6}{A}\), ce qui confirme l'absence de saturation marquée dans cet intervalle.
 \item Pour un même courant, \(B\) est plus élevé pour \(x=\SI{2}{mm}\) que pour \(x=\SI{3}{mm}\), conformément à la théorie (réluctance d'entrefer plus faible).
-\item Le rapport des pentes mesurées \(k_{2\mathrm{mm}}/k_{3\mathrm{mm}}\approx88.1/54.2\approx1.63\) est proche du rapport théorique \(3.4/2.4=1.42\) (\(\mu_r=400\), \(\lambda=0.4\,\mathrm{mm}\)).
-\item L'accord quantitatif théorie/mesure est de l'ordre de \(\pm 5\,\%\) à \(\pm 9\,\%\) (voir tableau de synthèse), ce qui valide le modèle à 3 entrefers.
+\item La pente de chaque droite représente l'augmentation de l'induction \(B\) lorsque le courant \(I\) 
+augmente. Le rapport des pentes mesurées \(k_{2\mathrm{mm}}/k_{3\mathrm{mm}}\approx88.1/54.2\approx1.63\) 
+montre donc que \(B\) croît plus vite pour \(x=\SI{2}{mm}\) que pour \(x=\SI{3}{mm}\).
+ Théoriquement, comme la pente est inversement proportionnelle à \(x+\ell_{\mathrm{fer,eq}}/\mu_r\),
+  on obtient \((3+0.4)/(2+0.4)=3.4/2.4=1.42\), avec \(\mu_r=400\) et \(\ell_{\mathrm{fer,eq}}/\mu_r=0.4\,\mathrm{mm}\).
+  L'écart entre les deux rapports sont proches, ce qui indique que le modèle linéaire est globalement valide.
 \end{itemize}
 
 \subsection{Mesures AC primaire-secondaire à \SI{35}{Hz} (4.3)}
@@ -118,8 +226,8 @@ Grandeurs relevées : \(\hat{U}_1\), \(\hat{I}_1\), déphasage \(\varphi(i_1,u_1
 \toprule
 Entrefer & \(\hat{U}_1\) [V] & \(\hat{I}_1\) [A] & \(\varphi(i_1,u_1)\) [\(^\circ\)] \\
 \midrule
-\(x=0\)              & 20.8 & 0.276 & 73.3 \\
-\(x=\SI{2}{mm}\)     & 2.95  & 0.300 & 49.5 \\
+\(x=\SI{0}{mm}\)              & 20.8 & 0.276 & 73.35 \\
+\(x=\SI{2}{mm}\)     & 2.95  & 0.300 & 49.66 \\
 \bottomrule
 \end{tabular}
 \label{tab:AC_ref}
@@ -127,54 +235,40 @@ Entrefer & \(\hat{U}_1\) [V] & \(\hat{I}_1\) [A] & \(\varphi(i_1,u_1)\) [\(^\cir
 
 \begin{figure}[H]
 \centering
-\begin{minipage}[t]{0.48\textwidth}
+\begin{minipage}[t]{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{images/TEK00000.PNG}
-\caption*{\(x=0\,\mathrm{mm}\) — \(\varphi=73.35°\), \(f=35{,}0\,\mathrm{Hz}\)}
+\vspace{0.3em}
+{\small \(x=\SI{0}{mm}\), \(\varphi=73.35^\circ\), \(f=\SI{35.0}{Hz}\)\par}
 \end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
+\begin{minipage}[t]{0.49\textwidth}
 \centering
 \includegraphics[width=\textwidth]{images/TEK00001.PNG}
-\caption*{\(x=\SI{2}{mm}\) — \(\varphi=43.66°\), \(f=35{,}0\,\mathrm{Hz}\)}
+\vspace{0.3em}
+{\small \(x=\SI{2}{mm}\), \(\varphi=49.66^\circ\), \(f=\SI{35.0}{Hz}\)\par}
 \end{minipage}
 \caption{Captures oscilloscope — \(U_1\) (CH1) et \(I_1\) (CH2) à \SI{35}{Hz}}
 \label{fig:oscillo_AC}
 \end{figure}
 
 \subsubsection{Commentaire}
-La tension \(U_1\) chute de \(\SI{20.8}{V}\) (à \(x=0\)) à \(\SI{2.95}{V}\) (à \(x=\SI{2}{mm}\)) pour un courant quasi-identique, ce qui reflète la forte diminution de \(L_{11}\) avec l'entrefer. À \(x=0\), l'amplificateur atteignait sa limite de tension (générateur bloquant). On peut estimer l'inductance et les paramètres du circuit à partir de ces mesures :
+Les mesures montrent que, pour obtenir presque le même courant, il faut une tension beaucoup plus grande à \(x=0\) qu'à \(x=\SI{2}{mm}\). Cela signifie que le primaire est beaucoup plus inductif lorsque l'entrefer est nul.
 
-\[
-|Z_1|=\frac{\hat{U}_1}{\hat{I}_1}, \quad
-\omega L_{11}=|Z_1|\sin\varphi, \quad
-R_{1,\mathrm{eff}}=|Z_1|\cos\varphi.
-\]
+Quand on augmente l'entrefer, l'inductance diminue. Le circuit s'oppose donc moins au courant alternatif : la tension nécessaire baisse fortement et le déphasage diminue aussi.
 
-\begin{table}[H]
+Ces observations sont cohérentes avec la théorie : l'entrefer augmente la réluctance du circuit magnétique, ce qui réduit l'inductance du primaire.
+
+\subsection{Intégrateur à ampli-op et diagramme de Bode}
+
+Le montage intégrateur utilisé pour reconstruire le flux à partir de la tension mesurée est présenté à la figure~\ref{fig:schema_integ}. À partir de ce schéma, on peut établir sa fonction de transfert puis identifier les fréquences caractéristiques qui permettent d'interpréter le diagramme de Bode.
+
+\begin{figure}[H]
 \centering
-\caption{Paramètres estimés à \SI{35}{Hz}}
-\begin{tabular}{lcccc}
-\toprule
-Entrefer & \(|Z_1|\) [\si{\ohm}] & \(\omega L_{11}\) [\si{\ohm}] & \(L_{11}\) [mH] & \(R_{1,\mathrm{eff}}\) [\si{\ohm}] \\
-\midrule
-\(x=0\)          & 75.4 & 72.2 & 328 & 21.7 \\
-\(x=\SI{2}{mm}\) & 9.83 & 7.47 & 33.9 & 6.39 \\
-\bottomrule
-\end{tabular}
-\label{tab:AC_params}
-\end{table}
+\includegraphics[width=0.8\textwidth]{images/schemaintegrateur.png}
+\caption{Schéma du montage intégrateur à ampli-op}
+\label{fig:schema_integ}
+\end{figure}
 
-À \(x=\SI{2}{mm}\), la résistance effective (\SI{6.39}{\ohm}) est proche de \(R_1=\SI{6.16}{\ohm}\), ce qui indique que les pertes fer sont faibles à grand entrefer. À \(x=0\), la résistance effective est nettement plus élevée (\SI{21.7}{\ohm}), révélant des pertes par hystérèse et courants de Foucault significatifs lorsque le flux est intense.
-
-Quand l'entrefer augmente, l'inductance \(L_{11}\) diminue (réluctance croissante), ce qui :
-\begin{itemize}
-\item réduit \(U_1\) pour un même courant \(I_1\) (impédance plus faible) ;
-\item réduit le déphasage \(\varphi\) (comportement plus résistif).
-\end{itemize}
-
-\subsection{Intégrateur à ampli-op et diagramme de Bode (4.3.2)}
-
-Le montage intégrateur (annexe, \(R_9=R_{11}=\SI{10}{k\ohm}\), \(R_{10}=\SI{100}{k\ohm}\), \(C=\SI{1}{\mu F}\)) a pour fonction de transfert :
 \[
 H(j\omega)=\frac{U_{\mathrm{out}}}{U_{\mathrm{in}}}=-\frac{R_{10}}{R_9}\cdot\frac{1}{1+j\omega R_{10}C}.
 \]
@@ -184,7 +278,12 @@ f_c=\frac{1}{2\pi R_{10}C}=\frac{1}{2\pi\times10^5\times10^{-6}}\approx\SI{1.59}
 \qquad
 f_{0\mathrm{dB}}=\frac{1}{2\pi R_9 C}=\frac{1}{2\pi\times10^4\times10^{-6}}\approx\SI{15.9}{Hz}.
 \]
-À \(\SI{35}{Hz}\gg f_c\), le montage est en régime quasi-intégrateur pur : \(|H|\approx R_{10}/(R_9\cdot\omega R_{10}C)=1/(\omega R_9 C)\).
+
+À la fréquence de travail \(\SI{35}{Hz}\), on a bien \(\SI{35}{Hz}\gg f_c\). Le montage fonctionne donc dans un régime proche de l'intégrateur idéal, avec :
+\[
+|H|\approx \frac{R_{10}}{R_9\cdot\omega R_{10}C}=\frac{1}{\omega R_9 C}.
+\]
+Le diagramme de Bode de la figure~\ref{fig:bode_integ} confirme ce comportement et permet de lire directement le gain et la phase à \(\SI{35}{Hz}\).
 
 \begin{figure}[H]
 \centering
@@ -194,22 +293,38 @@ f_{0\mathrm{dB}}=\frac{1}{2\pi R_9 C}=\frac{1}{2\pi\times10^4\times10^{-6}}\appr
 \label{fig:bode_integ}
 \end{figure}
 
-\subsection{Diagramme B-H en mode \texorpdfstring{\(x-y\)}{x-y} et estimation de \texorpdfstring{\(L_{12}\)}{L12} (4.3.3 / 4.3.4)}
+\subsection{Diagramme B-H en mode \texorpdfstring{\(x-y\)}{x-y} et estimation de \texorpdfstring{\(L_{12}\)}{L12}}
 
 Sur l'oscilloscope en mode \(x-y\) :
 \begin{itemize}
-\item axe \(x\) : tension aux bornes d'une résistance shunt proportionnelle à \(i_1(t)\) ;
-\item axe \(y\) : sortie de l'intégrateur proportionnelle à \(\int u_2\,dt \propto \Phi(t) \propto B(t)\).
+\item axe \(x\) : sonde de courant (pince ampèremétrique, \(\SI{1}{A}=\SI{1}{V}\)), image directe de \(i_1(t)\) ;
+\item axe \(y\) : sortie de l'intégrateur, proportionnelle au flux totalisé \(\Psi_2(t)=\int u_2\,dt\).
 \end{itemize}
 Le tracé obtenu est une image de la boucle \(B\)-\(H\) à facteur d'échelle près.
 
 \paragraph{Variation avec l'entrefer.}
 En augmentant \(x\), la boucle s'allonge horizontalement (courant plus grand pour un même flux) et s'amincit (pertes hystérétiques plus faibles). La pente de la droite centrale est proportionnelle à \(L_{12}\).
 
-\paragraph{Estimation de \(L_{12}\).}
-En régime sinusoïdal, la tension induite au secondaire est \(U_2=j\omega L_{12}I_1\), d'où :
+\paragraph{Conversion volt \(\to\) weber sur l'axe \(y\).}
+La tension induite au secondaire est \(U_2=j\omega L_{12}I_1\) et le flux totalisé vaut \(\Psi_2=L_{12}I_1\). En domaine de Laplace, l'intégration donne \(\Psi_2(s)=U_2(s)/s\). La sortie de l'intégrateur à ampli-op est :
 \[
-L_{12}=\frac{|U_2|}{\omega\,|I_1|}.
+V_\mathrm{out}=H(j\omega)\cdot U_2
+=\frac{-1}{j\omega R_9 C}\cdot j\omega L_{12}I_1
+=\frac{-L_{12}\,I_1}{R_9\,C},
+\]
+car les termes \(j\omega\) se simplifient à \(\SI{35}{Hz}\gg f_c\). La sortie de l'intégrateur est donc directement proportionnelle au flux, avec le facteur de conversion :
+\[
+\boxed{1\,\text{V en }y = R_9\,C = 10^4\times10^{-6}=\SI{0.01}{Wb}=\SI{10}{mWb}.}
+\]
+
+\paragraph{Estimation de \(L_{12}\) par la pente.}
+Sur l'axe \(x\), la pince ampèremétrique donne \(V_x=1\cdot I_1\) (lecture directe en ampères). La pente du diagramme \(x\)-\(y\) s'écrit :
+\[
+\frac{\Delta y}{\Delta x}=\frac{V_\mathrm{out}}{V_x}=\frac{L_{12}/(R_9\,C)}{I_1/I_1}=\frac{L_{12}}{R_9\,C},
+\]
+d'où :
+\[
+\boxed{L_{12}=\frac{\Delta y}{\Delta x}\cdot R_9\,C=\frac{\Delta y}{\Delta x}\times\SI{0.01}{H}.}
 \]
 
 \begin{figure}[H]
@@ -217,12 +332,12 @@ L_{12}=\frac{|U_2|}{\omega\,|I_1|}.
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \includegraphics[width=\textwidth]{images/TEK00005.PNG}
-\caption*{\(x=0\,\mathrm{mm}\) — \(\Delta x=250\,\mathrm{mV}\), \(\Delta y=3{,}48\,\mathrm{V}\)}
+\caption*{\(x=0\,\mathrm{mm}\), \(\Delta x=\SI{250}{mV}\), \(\Delta y=\SI{3.48}{V}\)}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}
 \centering
 \includegraphics[width=\textwidth]{images/TEK00004.PNG}
-\caption*{\(x=\SI{2}{mm}\) — \(\Delta x=470\,\mathrm{mV}\), \(\Delta y=680\,\mathrm{mV}\)}
+\caption*{\(x=\SI{2}{mm}\), \(\Delta x=\SI{470}{mV}\), \(\Delta y=\SI{680}{mV}\)}
 \end{minipage}
 \caption{Boucles \(B\)-\(H\) en mode \(x\)-\(y\) avec curseurs \(\Delta\) (mesure de \(L_{12}\))}
 \label{fig:BH_xy}
@@ -230,34 +345,45 @@ L_{12}=\frac{|U_2|}{\omega\,|I_1|}.
 
 \begin{table}[H]
 \centering
-\caption{Estimation de \(L_{12}\) à partir de la mesure AC}
-\begin{tabular}{lccc}
+\caption{Estimation de \(L_{12}\) à partir de la pente du diagramme \(x\)-\(y\)}
+\begin{tabular}{lcccc}
 \toprule
-Entrefer & \(L_{12}\) mesuré [mH] & \(L_{12}\) théorique [mH] & Écart [\%] \\
+Entrefer & \(\Delta y/\Delta x\) & \(L_{12}\) mesuré [mH] & \(L_{12}\) théorique [mH] & Écart [\%] \\
 \midrule
-\(x=0\,\mathrm{mm}\)$^*$ & 139 & 34.6 & $+302$ \\
-\(x=\SI{2}{mm}\)          & 14.5 & 5.8  & $+150$ \\
+\(x=\SI{0}{mm}\) & 13.9 & 139 & 34.6 & $+302$ \\
+\(x=\SI{2}{mm}\)          & 1.45 & 14.5 & 5.8  & $+150$ \\
 \bottomrule
 \end{tabular}
 \label{tab:L12_mes}
 \end{table}
 
+\paragraph{Commentaire sur les écarts.}
+Les valeurs mesurées sont systématiquement supérieures aux prédictions théoriques. Cela s'explique principalement par deux limites du modèle analytique :
+\begin{itemize}
+\item \textbf{Perméabilité sous-estimée.} Le modèle utilise \(\mu_r=400\) constant, ce qui donne \(\lambda=\ell_\mathrm{fer,eq}/\mu_r=\SI{0.4}{mm}\). Or la perméabilité réelle des tôles ferromagnétiques est bien supérieure à faible induction (\(\mu_r\approx 2000\text{--}5000\)). À \(x=0\), l'inductance ne dépend que de \(\lambda\) : si \(\mu_r\) réel est environ 4 fois plus grand, \(\lambda\) est divisé par 4, et \(L_{12}\propto 1/\lambda\) est multiplié par~4, ce qui est cohérent avec le facteur \(\times 4\) observé.
+\item \textbf{Effets de franges.} Le modèle suppose que le flux est canalisé dans la section géométrique \(S_g\) de l'entrefer. En réalité, le flux déborde sur les bords (fringing), ce qui augmente la section effective et donc la perméance. Cet effet est proportionnellement plus important pour les petits entrefers, ce qui explique que l'écart soit plus grand à \(x=0\) (\(+302\,\%\)) qu'à \(x=\SI{2}{mm}\) (\(+150\,\%\)).
+\end{itemize}
+
 \subsection{Synthèse — comparaison théorie / mesure}
 
 \begin{table}[H]
 \centering
-\caption{Tableau de synthèse}
-\begin{tabular}{p{5.2cm}p{2.8cm}p{2.8cm}p{2.8cm}}
+\caption{Tableau de synthèse --- comparaison théorie / mesure}
+\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-Grandeur & Théorie & Mesure & Écart [\%] \\
+Grandeur & Théorie & Mesure & Écart & Référence \\
 \midrule
-\(R_1(20)\) [\si{\ohm}]                                & 6.65   & 6.164  & $-7.3$ \\
-\(B\) à \(I=\SI{0.5}{A}\), \(x=\SI{2}{mm}\) [mT]      & 43.6   & 45.6   & $+4.6$ \\
-\(B\) à \(I=\SI{0.5}{A}\), \(x=\SI{3}{mm}\) [mT]      & 30.8   & 28.1   & $-8.7$ \\
-\(L_{11}\) à \(x=\SI{2}{mm}\) (AC) [mH]               & 14.4   & 33.9   & $+135$ \\
-\(L_{12}\) à \(x=0\,\mathrm{mm}\)$^*$ [mH]             & 34.6   & 139    & $+302$ \\
-\(L_{12}\) à \(x=\SI{2}{mm}\) [mH]                    & 5.8    & 14.5   & $+150$ \\
+\(R_1\) [\si{\ohm}] & 6.65 & 6.164 & $-7{,}3\,\%$ & Table~\ref{tab:R1_mes} \\
+\(B\) à \(I=\SI{0.5}{A}\), \(x=\SI{2}{mm}\) [mT] & 43.6 & 45.6 & $+4{,}6\,\%$ & Tab.~\ref{tab:Bmes_mont}, Fig.~\ref{fig:BfI_comp} \\
+\(B\) à \(I=\SI{0.5}{A}\), \(x=\SI{3}{mm}\) [mT] & 30.8 & 28.1 & $-8{,}7\,\%$ & Tab.~\ref{tab:Bmes_mont}, Fig.~\ref{fig:BfI_comp} \\
+\(L_{12}\) à \(x=\SI{0}{mm}\) [mH] & 34.6 & 139 & $+302\,\%$ & Tab.~\ref{tab:L12_mes}, Fig.~\ref{fig:BH_xy} \\
+\(L_{12}\) à \(x=\SI{2}{mm}\) [mH] & 5.8 & 14.5 & $+150\,\%$ & Tab.~\ref{tab:L12_mes}, Fig.~\ref{fig:BH_xy} \\
 \bottomrule
 \end{tabular}
+}
 \label{tab:comparaison}
 \end{table}
+
+\noindent Les mesures DC ($R_1$ et $B$) présentent des écarts inférieurs à $10\,\%$, ce qui valide le modèle à réluctances pour ces grandeurs. En revanche, l'inductance mutuelle $L_{12}$ est nettement sous-estimée par le modèle théorique à $\mu_r=400$, principalement en raison de la perméabilité réelle bien supérieure et des effets de franges (cf.~commentaire p.~\pageref{tab:L12_mes}).

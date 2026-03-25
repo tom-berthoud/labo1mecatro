@@ -16,11 +16,11 @@ Hadrien :
 
 Tom :
 - [ ] 3.2 Controler les numéros et demander à Blatti leur numéro du convertisseur + ajouter la résolution
-- [ ] 3.3.1 Dégager la formule et simplifier 
-- [ ] 3.3.2 Tableau bof
-- [ ] 3.5.1 image petite et enlever *
-- [ ] 3.5.2 Ne répond pas bien à la question
-- [ ] 3.6 Ajouter sur le graph f35hz
+- [x] 3.3.1 Dégager la formule et simplifier 
+- [x] 3.3.2 Tableau bof
+- [x] 3.5.1 image petite et enlever *
+- [x] 3.5.2 Ne répond pas bien à la question
+- [x] 3.6 Ajouter sur le graph f35hz
 - [ ] 3.7 Voir pourquoi grosse diff mesure-théorie Regarde demain
-- [ ] 3.8 Améliorer le tableau et mettre liens vers les parties du rapport
+- [x] 3.8 Améliorer le tableau et mettre liens vers les parties du rapport
 - [ ] 4 conlusion séparée entre analyse
