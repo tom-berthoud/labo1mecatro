@@ -1,6 +1,6 @@
 # PDFs (garder uniquement main.pdf)
 *.pdf
-
+!rapport/images/*pdf
 
 # Conversations Claude
 rapport/conversations/
