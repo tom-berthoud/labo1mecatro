@@ -1,0 +1,76 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEIG-VD / institut REDS
+%%
+%% Modèle Latex pour laboratoire
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,12pt,oneside]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\IfFileExists{french.ldf}{\usepackage[french]{babel}}{\usepackage{babel}}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\epstopdfsetup{outdir=./Images/converted_to_pdf/}
+\pagenumbering{arabic}
+\usepackage[top=3cm, bottom=3cm, left=3cm, right=3cm, showframe=false]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage{pdfpages}
+\usepackage{color}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage[american]{circuitikz}
+
+\input{chapitres/constantes.tex}
+
+\pagestyle{empty}
+\usepackage{fancyhdr}
+\setlength{\headheight}{27.06pt}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[L]{Labo\nbrlabo: \titre}
+\fancyhead[R]{Rapport de laboratoire}
+\fancyfoot{}
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[R]{Page \thepage}
+\fancyfoot[L]{HEIG-VD | \nomAuteur }
+
+\begin{document}
+\input{chapitres/premiere_page.tex}
+\thispagestyle{empty}
+\setcounter{page}{1}
+\newpage
+
+\tableofcontents
+\newpage
+
+\input{chapitres/Introduction.tex}
+\input{chapitres/AnalyseEtConception}
+\input{chapitres/Realisation.tex}
+\input{chapitres/Conclusion.tex}
+
+\section{Signatures}
+
+\begin{flushright}
+Yverdon-les-Bains, \today
+\end{flushright}
+
+\vspace{1cm}
+\noindent
+\begin{tabular}{@{}c c@{}}
+\parbox{0.45\textwidth}{\centering \nomAuteurA} &
+\parbox{0.45\textwidth}{\centering \nomAuteurB} \\
+\\[0.4cm]
+\parbox{0.45\textwidth}{\centering \includegraphics[width=4cm]{images/signaturetom.jpg}} &
+\parbox{0.45\textwidth}{\centering \includegraphics[width=4cm]{images/signaturehadrien.jpg}} \\
+\end{tabular}
+
+\end{document}

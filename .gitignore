@@ -1,0 +1,26 @@
+# PDFs (garder uniquement main.pdf)
+*.pdf
+
+
+# Conversations Claude
+rapport/conversations/
+
+# LaTeX build artifacts
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# LibreOffice
+*.ods~
+.~lock.*
+
+# OS
+.DS_Store
+Thumbs.db
