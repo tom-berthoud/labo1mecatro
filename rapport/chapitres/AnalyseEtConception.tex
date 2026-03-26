@@ -14,10 +14,42 @@ La longueur moyenne par spire est estimée à partir du périmètre moyen du rec
 \ell_{\text{spire,moy}}=2\left(\frac{l_1'+l_3'}{2}+\frac{l_2'+l_4'}{2}\right)
 =2\left(\frac{17+29}{2}+\frac{19+32}{2}\right)=\SI{97}{mm}.
 \]
+
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/3.1.1sch.jpg}
-    \caption{Longueur moyenne par spire}
+\centering
+\begin{tikzpicture}[scale=0.15]
+
+% ===== Bloc gauche (cadre + trou) =====
+% Rectangle extérieur (29 x 32)
+\draw[thick] (0,0) rectangle (29,32);
+
+% Rectangle intérieur (17 x 17 centré)
+\draw[thick] (6,7.5) rectangle (23,24.5);
+
+% Dimensions extérieures
+\node[above] at (14.5,32) {\color{red} 29};
+\node[right] at (29,16) {\color{red} 32};
+
+% Dimensions intérieures
+\node at (14.5,22) {\color{red} 17};
+\node[right] at (18,16) {\color{red} 17};
+
+% Pointillés rouges (zone intermédiaire)
+\draw[red, dashed, thick] (3,3) rectangle (26,29);
+
+% ===== Flèche =====
+\draw[->, thick] (35,16) -- (45,16);
+
+% ===== Bloc droit =====
+% Rectangle plein (23 x 25.5)
+\draw[thick, fill=gray!20] (50,3.25) rectangle (73,28.75);
+
+% Dimensions
+\node[above] at (61.5,28.75) {\color{red} 23};
+\node[right] at (73,16) {\color{red} 25,5};
+
+\end{tikzpicture}
+\caption{Longueur moyenne par spire}
 \end{figure}
 Longueur totale de cuivre :
 \[
@@ -62,6 +94,7 @@ On retient \(I_{\mathrm{ref}}\approx\SI{0.50}{A}\).
 \subsection{Schéma magnétique équivalent}
 La structure double~E comporte \textbf{trois colonnes} séparées par le même entrefer de longueur \(x\) : la colonne centrale (où est bobiné \(N_1\)) et les deux colonnes latérales. Le schéma équivalent est une source magnétique \(\mathcal{F}=N_1I\) en série avec la réluctance de la colonne centrale, puis en parallèle avec les deux branches latérales :
 
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.1\textwidth]{images/3.2req.jpg}
@@ -82,7 +115,7 @@ La structure double~E comporte \textbf{trois colonnes} séparées par le même e
 \[
 =
 \frac{1}{
-2\,\textcolor{yellow}{\frac{15 \times 10^{-3}}{\mu_0 \cdot 400 \cdot 210 \times 10^{-6}}}
+2\,\textcolor{yellow!70!black}{\frac{15 \times 10^{-3}}{\mu_0 \cdot 400 \cdot 210 \times 10^{-6}}}
 +
 \textcolor{orange}{\frac{x \times 10^{-3}}{\mu_0 \cdot 210 \times 10^{-6}}}
 +
