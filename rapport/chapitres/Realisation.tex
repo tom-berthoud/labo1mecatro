@@ -87,8 +87,8 @@ La résistance \(R_1\) est mesurée par les méthodes 2 fils et 4 fils.
 % Bornes Sense V
 \fill[red!70] (2.9,0) circle (4pt);
 \fill[black!70] (4,0) circle (4pt);
-\node[below=5pt, font=\scriptsize, red!70!black] at (3.2,0) {HI};
-\node[below=5pt, font=\scriptsize] at (4.3,0) {LO};
+\node[below=5pt,dashed, font=\scriptsize, red!70!black] at (3.2,0) {HI};
+\node[below=5pt,dashed, font=\scriptsize] at (4.3,0) {LO};
 \fill[red!70!black] (0.6,-1.5) circle (2pt);
 \fill (1.7,-2) circle (2pt);
 % Accolades Source / Sense
@@ -100,8 +100,8 @@ La résistance \(R_1\) est mesurée par les méthodes 2 fils et 4 fils.
 \draw[thick, red!70!black] (0.6,0) -- (0.6,-3);
 \draw[thick] (1.7,0) -- (1.7,-3);
 % Fils Sense (tirets) rejoignent les mêmes points
-\draw[thick, red!70!black] (2.9,0) -- (2.9,-1.5) -- (0.55,-1.5);
-\draw[thick] (4,0) -- (4,-2) -- (1.7,-2);
+\draw[thick, dashed, red!70!black] (2.9,0) -- (2.9,-1.5) -- (0.55,-1.5);
+\draw[thick, dashed] (4,0) -- (4,-2) -- (1.7,-2);
 % I=0 entre les fils sense
 
 % Points de contact Kelvin
@@ -398,12 +398,11 @@ Le montage expérimental utilisé pour les relevés est décrit par le schéma c
 % Ampli OUT → Sonde IN
 \draw[thick, red!70!black] (7.2,6.6) -- (8.5,6.6);
 % Sonde OUT → Bobine +
-\draw[thick, red!70!black] (11.2,6.6) -- (13.76,6.6);
+\draw[thick, red!70!black] (11.2,6.6) -- (14.3,6.6);
 
 % Bobine - → return to ground bus
-\draw[thick] (13.76,5.80) -- (12.3,5.80) -- (12.3,4.9) -- (5.5,4.9);
-% Ground bus
-\draw[thick, gray, densely dashed] (3.2,4.9) -- (12.3,4.9);
+\draw[thick] (14.3,5.80) -- (12.3,5.80) -- (12.3,4.9) -- (5.5,4.9);
+
 
 % CH1 → voltage probe (between Sonde OUT and Bobine +)
 \draw[thick, yellow!70!black, densely dashed] (7.5,3.2) -- (7.5,4) -- (13.0,4) -- (13.0,6.6);
@@ -450,11 +449,11 @@ Entrefer & \(\hat{U}_1\) [V] & \(\hat{I}_1\) [A] & \(\varphi(i_1,u_1)\) [\(^\cir
 \end{figure}
 
 \subsubsection{Commentaire}
-Les mesures montrent que, pour obtenir presque le même courant, il faut une tension beaucoup plus grande à \(x=0\) qu'à \(x=\SI{2}{mm}\). Cela signifie que le primaire est beaucoup plus inductif lorsque l'entrefer est nul.
-
-Quand on augmente l'entrefer, l'inductance diminue. Le circuit s'oppose donc moins au courant alternatif : la tension nécessaire baisse fortement et le déphasage diminue aussi.
-
-Ces observations sont cohérentes avec la théorie : l'entrefer augmente la réluctance du circuit magnétique, ce qui réduit l'inductance du primaire.
+\begin{itemize}
+\item \textbf{Rapport des tensions.} Pour un courant quasi identique (\(\approx\SI{0.3}{A}\)), la tension passe de \(\SI{20.8}{V}\) à \(\SI{2.95}{V}\) lorsqu'on ouvre l'entrefer, soit un rapport \(\approx 7\). L'impédance chute de \(Z_0=20.8/0.276\approx\SI{75}{\ohm}\) à \(Z_2=2.95/0.300\approx\SI{9.8}{\ohm}\), ce qui traduit directement la diminution de l'inductance du primaire.
+\item \textbf{Déphasage.} À \(x=0\), \(\varphi=73{,}4°\) : le circuit est fortement inductif (\(\cos\varphi\approx0{,}29\)). À \(x=\SI{2}{mm}\), \(\varphi=49{,}7°\) : la part résistive devient comparable à la part inductive. La composante résistive \(Z\cos\varphi\approx\SI{6.4}{\ohm}\) est d'ailleurs très proche de \(R_1=\SI{6.16}{\ohm}\) mesuré en DC, ce qui est cohérent.
+\item \textbf{Interprétation physique.} L'entrefer augmente la réluctance du circuit magnétique, ce qui réduit l'inductance \(L_1\propto N_1^2/\mathcal{R}\). L'impédance \(\omega L_1\) diminue et le déphasage se rapproche de celui d'un circuit purement résistif.
+\end{itemize}
 
 \newpage
 \subsection{Intégrateur à ampli-op et diagramme de Bode}
