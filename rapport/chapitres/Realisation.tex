@@ -875,7 +875,7 @@ Les résultats montrent que l’inductance mutuelle \(L_{12}\) diminue fortement
 
 Cependant, des écarts sont observés entre les valeurs mesurées et théoriques. Pour \(x=\SI{0}{mm}\), l’inductance est sous-estimée d’environ \(32\,\%\), tandis que pour \(x=\SI{2}{mm}\), elle est surestimée d’environ \(79\,\%\).
 
-Ces écarts peuvent s’expliquer par plusieurs facteurs. D’une part, l’intégrateur utilisé n’est pas idéal : malgré la correction apportée à partir du diagramme de Bode, une incertitude subsiste sur le facteur de conversion volt--weber. D’autre part, la mesure de la pente reste sensible au bruit et à la précision des curseurs, en particulier lorsque la pente est faible (cas de \(x=\SI{2}{mm}\)). Enfin, les hypothèses du modèle théorique (champ uniforme, absence de fuites de flux, linéarité du matériau) ne sont pas parfaitement vérifiées en pratique, ce qui contribue également aux écarts observés.
+Ces écarts peuvent s’expliquer par plusieurs facteurs. D’une part, l’intégrateur utilisé n’est pas idéal : malgré la correction apportée à partir du diagramme de Bode, une incertitude subsiste sur le facteur de conversion volt--weber. D’autre part les hypothèses du modèle théorique (champ uniforme, absence de fuites de flux, linéarité du matériau) ne sont pas parfaitement vérifiées en pratique, ce qui contribue également aux écarts observés.
 
 Malgré ces différences quantitatives, les résultats expérimentaux reproduisent correctement la tendance physique attendue.
 
@@ -893,12 +893,12 @@ Grandeur & Théorie & Mesure & Écart & Référence \\
 \(R_1\) [\si{\ohm}] & 6.65 & 6.164 & $-7{,}3\,\%$ & Table~\ref{tab:R1_mes} \\
 \(B\) à \(I=\SI{0.5}{A}\), \(x=\SI{2}{mm}\) [mT] & 58.3 & 45.6 & $-21{,}8\,\%$ & Tab.~\ref{tab:Bmes_mont}, Fig.~\ref{fig:BfI_comp} \\
 \(B\) à \(I=\SI{0.5}{A}\), \(x=\SI{3}{mm}\) [mT] & 39.8 & 28.1 & $-29{,}4\,\%$ & Tab.~\ref{tab:Bmes_mont}, Fig.~\ref{fig:BfI_comp} \\
-\(L_{12}\) à \(x=\SI{0}{mm}\) [mH] & 185 & 139 & $-24{,}9\,\%$ & Tab.~\ref{tab:L12_mes}, Fig.~\ref{fig:BH_xy} \\
-\(L_{12}\) à \(x=\SI{2}{mm}\) [mH] & 7.34 & 14.5 & $+97{,}5\,\%$ & Tab.~\ref{tab:L12_mes}, Fig.~\ref{fig:BH_xy} \\
+\(L_{12}\) à \(x=\SI{0}{mm}\) [mH] & 185 & 126.4 & $-31{,}7\,\%$ & Tab.~\ref{tab:L12_mes_corr}, Fig.~\ref{fig:BH_xy} \\
+\(L_{12}\) à \(x=\SI{2}{mm}\) [mH] & 7.34 & 13.1 & $+79{,}0\,\%$ & Tab.~\ref{tab:L12_mes_corr}, Fig.~\ref{fig:BH_xy} \\
 \bottomrule
 \end{tabular}
 }
 \label{tab:comparaison}
 \end{table}
 
-\noindent La résistance DC \(R_1\) est en bon accord avec la théorie, alors que les mesures d'induction \(B\) montrent des écarts plus marqués, de l'ordre de \(20\) à \(30\,\%\), tout en conservant la bonne tendance en fonction de l'entrefer. Pour l'inductance mutuelle \(L_{12}\), l'accord devient plus contrasté : à \(x=0\), la théorie surestime modérément la mesure, tandis qu'à \(x=\SI{2}{mm}\) elle la sous-estime fortement. Cela montre que le modèle linéaire reste sensible aux hypothèses faites sur la perméabilité et ne prend pas correctement en compte l'ensemble des effets réels du circuit magnétique, notamment les fuites et les effets de franges (cf.~commentaire p.~\pageref{tab:L12_mes}).
+\noindent La résistance DC \(R_1\) reste en bon accord avec la théorie. Les mesures d'induction \(B\) présentent des écarts plus marqués, de l'ordre de \(20\) à \(30\,\%\), tout en reproduisant correctement l'influence de l'entrefer. L'estimation de \(L_{12}\) confirme la bonne tendance physique, mais avec des écarts importants, surtout pour \(x=\SI{2}{mm}\), ce qui met en évidence les limites du modèle linéaire et l'influence des effets de frange, des fuites de flux et des incertitudes de mesure.
