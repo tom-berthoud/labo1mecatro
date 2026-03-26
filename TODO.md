@@ -4,13 +4,14 @@
 - [ ] Ajouter les appareils de mesure, référence 
 
 Hadrien :
-- [ ] 2.1 Mettre photo dimensions + photo Bobinage, enlever le textes inutiles
-- [ ] 2.2 Schéma périmètre
-- [ ] 2.3 Dire que l'on va prendre comme ref 0.3 A selon les indications de la pratique
-- [ ] 2.4 Schéma magnétique équivalent -> intégrer schéma et calcul iPad + mettre les 2 schémas un avec mur infini et un avec mur  = 400
-- [ ] 2.6 peut etre inverser 2,6 et 2.7
-- [ ] 2.3-4-5-6 enlever les lamda et mettre lfer/mur
-- [ ] 2.7 Adapter à 0.3 A (comme dans la pratique) + enlever les mesures on est dans la théorie à comparer plus tard
+- [x] 2.1 Mettre photo dimensions + photo Bobinage, enlever le textes inutiles
+- [x] 2.2 Schéma périmètre
+- [-] 2.3 Dire que l'on va prendre comme ref 0.3 A selon les indications de la pratique
+- [x] 2.4 Schéma magnétique équivalent -> intégrer schéma et calcul iPad + mettre les 2 schémas un avec mur infini et un avec mur  = 400
+- [x] 2.5 Vérifier les calculs
+- [x] 2.6 Vérif hypothèses et domaine de validité
+- [x] 2.3-4-5-6-7 enlever les lamda et mettre lfer/mur
+- [x] 2.7 Enlever les mesures on est dans la théorie à comparer plus tard
 - [ ] 2.8 Contrôler
 - [ ] 2.9 Contrôler
 

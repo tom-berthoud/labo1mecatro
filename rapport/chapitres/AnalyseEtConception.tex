@@ -1,25 +1,24 @@
 \section{Partie théorique}
 
 \subsection{Données géométriques et constantes}
-Les données utilisées proviennent des figures des consignes :
-\begin{itemize}
-\item Circuit magnétique : \(l_1=\SI{57}{mm}\), \(l_2=\SI{14}{mm}\), \(l_3=\SI{11}{mm}\), \(l_4=\SI{10.5}{mm}\), \(l_5=\SI{18}{mm}\), \(l_6=\SI{6}{mm}\), épaisseur \(e=\SI{15}{mm}\).
-\item Bobinage primaire : \(N_1=500\), diamètre fil \(d_1=\SI{0.4}{mm}\), dimensions \(l_1'=\SI{17}{mm}\), \(l_2'=\SI{19}{mm}\), \(l_3'=\SI{29}{mm}\), \(l_4'=\SI{32}{mm}\).
-\item Bobinage secondaire : \(N_2=200\), diamètre fil \(d_2=\SI{0.2}{mm}\).
-\item Cuivre : \(\rho_{20}=\SI{1.724e-8}{\ohm.m}\), \(\alpha=\SI{3.93e-3}{K^{-1}}\).
-\end{itemize}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/dimension.png}
+    \caption{Schéma de la structure double~E (dimensions en mm)}
+\end{figure}
 
-Section d'entrefer efficace (colonne centrale) :
-\[
-S_g \approx l_3\,e = (\SI{11}{mm})(\SI{15}{mm}) = \SI{165}{mm^2}=\SI{1.65e-4}{m^2}.
-\]
-
+\newpage
 \subsection{Résistance de la bobine principale}
 La longueur moyenne par spire est estimée à partir du périmètre moyen du rectangle bobiné :
 \[
 \ell_{\text{spire,moy}}=2\left(\frac{l_1'+l_3'}{2}+\frac{l_2'+l_4'}{2}\right)
 =2\left(\frac{17+29}{2}+\frac{19+32}{2}\right)=\SI{97}{mm}.
 \]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/3.1.1sch.jpg}
+    \caption{Longueur moyenne par spire}
+\end{figure}
 Longueur totale de cuivre :
 \[
 L_{cu,1}=N_1\,\ell_{\text{spire,moy}}=500\times \SI{97}{mm}=\SI{48.5}{m}.
@@ -34,8 +33,11 @@ R_1(20)=\rho_{20}\frac{L_{cu,1}}{A_{cu,1}}=1.724\times10^{-8}\times\frac{48.5}{1
 \]
 Variation thermique :
 \[
-R_1(T)=R_1(20)\bigl[1+\alpha(T-20)\bigr].
+R_1(T) = R_1(20)\bigl[1 + \alpha (T - 20)\bigr]
+\quad \text{avec} \quad
+\alpha = \SI{3.93e-3}{\per\degreeCelsius}
 \]
+
 \begin{table}[H]
 \centering
 \caption{Résistance théorique de la bobine primaire}
@@ -56,62 +58,80 @@ I_{\mathrm{ref}}=J\cdot A_{cu,1}=4.0\times 0.1257\approx \SI{0.503}{A}.
 \]
 On retient \(I_{\mathrm{ref}}\approx\SI{0.50}{A}\).
 
+\newpage
 \subsection{Schéma magnétique équivalent}
+La structure double~E comporte \textbf{trois colonnes} séparées par le même entrefer de longueur \(x\) : la colonne centrale (où est bobiné \(N_1\)) et les deux colonnes latérales. Le schéma équivalent est une source magnétique \(\mathcal{F}=N_1I\) en série avec la réluctance de la colonne centrale, puis en parallèle avec les deux branches latérales :
 
-\paragraph{Hypothèses.}
-Fuites de flux négligées, section uniforme sur chaque branche, flux symétrique dans les deux branches latérales.
-
-La structure double~E comporte \textbf{trois colonnes} séparées par le même entrefer de longueur \(x\) : la colonne centrale (où est bobiné \(N_1\)) et les deux colonnes latérales. Le schéma équivalent est une source de FMM \(\mathcal{F}=N_1I\) en série avec la réluctance de la colonne centrale \(\mathcal{R}_c\), puis en parallèle avec les deux branches latérales \(\mathcal{R}_b\) :
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.1\textwidth]{images/3.2req.jpg}
+\caption{Schéma magnétique équivalent}
+\end{figure}
+\newpage
+\paragraph{Perméance vue par la bobine pour $\mu_r fer = \infty$}
 \[
-\mathcal{R}_c = \mathcal{R}_{g,c} + \mathcal{R}_{\mathrm{fer},c}, \qquad
-\mathcal{R}_b = \mathcal{R}_{g,b} + \mathcal{R}_{\mathrm{fer},b}.
+=
+\frac{1}{
+\textcolor{orange}{\frac{x \times 10^{-3}}{\mu_0 \cdot 210 \times 10^{-6}}}
++
+\frac{1}{2}\,\textcolor{red}{\frac{x \times 10^{-3}}{\mu_0 \cdot 157.5 \times 10^{-6}}}
+}
+[H]\]
+
+\paragraph{Perméance vue par la bobine pour $\mu_r fer = 400$}
+\[
+=
+\frac{1}{
+2\,\textcolor{yellow}{\frac{15 \times 10^{-3}}{\mu_0 \cdot 400 \cdot 210 \times 10^{-6}}}
++
+\textcolor{orange}{\frac{x \times 10^{-3}}{\mu_0 \cdot 210 \times 10^{-6}}}
++
+\frac{1}{2}\left(
+2\,\textcolor{blue}{\frac{23.25 \times 10^{-3}}{\mu_0 \cdot 400 \cdot 90 \times 10^{-6}}}
++
+2\,\textcolor{green}{\frac{15 \times 10^{-3}}{\mu_0 \cdot 400 \cdot 157.5 \times 10^{-6}}}
++
+\textcolor{red}{\frac{x \times 10^{-3}}{\mu_0 \cdot 157.5 \times 10^{-6}}}
+\right)
+}
+[H]\]
+
+\[(\mu_0 = 4\pi \times 10^{-7}) \text{ et } x \text{ en [mm]}\] .
+
+\paragraph{Comparaison des deux expressions}
+
+Lorsque $\mu_r \to \infty$, les réluctances du fer deviennent nulles. La perméance équivalente est alors uniquement déterminée par les entrefers.
+
+Pour une valeur finie de $\mu_r$ (par exemple $\mu_r = 400$), les réluctances du fer s'ajoutent à celles des entrefers, ce qui augmente la réluctance totale et donc diminue la perméance.
+
+\subsection{Flux et induction}
+Le flux total créé par le primaire est \(\Phi_c=N\cdot I\cdot\,P_{eq}\). Le flux dans chaque branche latérale vaut donc \(\Phi_l = \Phi_c/2\).
+L'induction dans l'entrefer centrale vaut \(B_c = \frac{\Phi_c}{A_c}\) et latéral \(B_l = \frac{\Phi_l}{A_l}\).
+
+Pour \(\mu_r fer = \infty\):
+\[
+\boxed{\Phi_c(N, I, x) = N \cdot I \cdot
+\frac{1}{
+\textcolor{orange}{\frac{x \times 10^{-3}}{\mu_0 \cdot 210 \times 10^{-6}}}
++
+\frac{1}{2}\,\textcolor{red}{\frac{x \times 10^{-3}}{\mu_0 \cdot 157.5 \times 10^{-6}}}
+}}.
 \]
 
-\paragraph{Cas \(\mu_r\to\infty\).}
-Toutes les réluctances de fer s'annulent ; seuls les entrefers subsistent. Les trois colonnes ont le même entrefer \(x\) :
-\[
-\mathcal{R}_{g,c}=\mathcal{R}_{g,b}=\frac{x}{\mu_0 S_g}.
-\]
-La réluctance équivalente vue par la source de FMM est :
-\[
-\mathcal{R}_{eq,\infty}
-= \mathcal{R}_{g,c}+\frac{\mathcal{R}_{g,b}}{2}
-= \frac{x}{\mu_0 S_g}+\frac{x}{2\mu_0 S_g}
-= \frac{3x}{2\mu_0 S_g}.
-\]
-
-\paragraph{Cas \(\mu_r=400\).}
-On regroupe la contribution du fer dans un terme \(\lambda=\ell_{\mathrm{fer,eq}}/\mu_r\) :
-\[
-\mathcal{R}_{eq,400}
-= \frac{3(x+\lambda)}{2\mu_0 S_g}.
-\]
+Pour un I et N fixe, on voit que le flux \(\Phi\) et l'induction \(B\) sont inversement proportionnels à \(x\) dans le cas où \(\mu_r = \infty\) et partiellement inversement proportionnels à \(x\) dans le cas où \(\mu_r < \infty\) (plus l'entrefer est petit, plus le flux et l'induction sont élevés).
+A \(x=0\), le modèle avec \(\mu_r=\infty\) prédit un flux infini mais dans la réalité \(\mu_r\) n'est pas infini et donc limite le flux.
 
 \subsection{Hypothèses et domaine de validité}
-Le modèle est linéaire de premier ordre. Il est valide si :
+Le modèle est valide si :
 \begin{itemize}
-\item le matériau n'est pas saturé (\(B\) reste sous le coude de la courbe \(B(H)\)) ;
-\item l'hystérèse et les pertes fer sont négligées (valable en quasi-statique) ;
-\item les fuites de flux et les effets de franges restent modérés.
+\item La section est uniforme sur chaque branche et flux symétrique dans les deux branches latérales.
+\item le matériau n'est pas saturé.
+\item l'hystérèse et les pertes fer sont négligées.
+\item les fuites et les franges restent modérés.
 \end{itemize}
 
-\subsection{Perméance, flux et induction}
-La perméance équivalente est l'inverse de la réluctance :
-\[
-P_{eq,\infty}=\frac{2\mu_0 S_g}{3x},
-\qquad
-P_{eq,400}=\frac{2\mu_0 S_g}{3(x+\lambda)}.
-\]
-Le flux total créé par le primaire est \(\Phi_c=N_1 I\,P_{eq}\). Par symétrie, chaque branche latérale porte \(\Phi_g=\Phi_c/2\). L'induction dans un entrefer latéral vaut :
-\[
-\boxed{B_\infty(x,I)=\frac{\mu_0 N_1 I}{3x}},
-\qquad
-\boxed{B_{400}(x,I)=\frac{\mu_0 N_1 I}{3(x+\lambda)}}.
-\]
-La perméabilité finie du fer revient à augmenter l'entrefer effectif de \(\lambda\). Le champ est supposé uniforme dans l'entrefer (approximation de premier ordre).
-
 \subsection{Courbes théoriques demandées}
-On prend \(\lambda=\SI{0.40}{mm}\) (\textit{cf.} comparaison avec les mesures, section~\ref{sec:realisation}).
+Induction dans l'entrefer latérale (un coté).
 
 \begin{figure}[H]
 \centering
@@ -127,6 +147,7 @@ On prend \(\lambda=\SI{0.40}{mm}\) (\textit{cf.} comparaison avec les mesures, s
 \label{fig:BfI}
 \end{figure}
 
+\newpage
 \subsection{Inductances propre et mutuelle}
 En négligeant les fuites :
 \[
