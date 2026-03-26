@@ -135,8 +135,7 @@ Le modèle est valide si :
 \item les fuites et les franges restent modérés.
 \end{itemize}
 
-\subsection{Courbes théoriques demandées}
-Induction dans l'entrefer latérale (un coté).
+\subsection{Évolution de l'induction dans l'entrefer latéral (un côté)}
 
 \begin{figure}[H]
 \centering
@@ -147,42 +146,86 @@ Induction dans l'entrefer latérale (un coté).
 
 \begin{figure}[H]
 \centering
+\includegraphics[width=0.85\textwidth]{images/erreur_relative.png}
+\caption{Erreur relative entre les modèles avec \(\mu_r=400\) (reference) et \(\mu_r=\infty\) pour \(B=f(x)\)}
+\end{figure}
+
+\paragraph{Commentaire}
+Comme expliqué précédemment, l'induction \(B\) décroît avec \(x\) de manière inversement proportionnelle.
+
+On peut observer que plus l’entrefer augmente, plus le fait de négliger la perméance du fer a un impact faible sur la précision. Par exemple, pour un entrefer de \(\SI{2}{mm}\), on surestime \(B\) de 7.5\% en prenant \(\mu_rfer=\infty\).
+
+\begin{figure}[H]
+\centering
 \includegraphics[width=0.85\textwidth]{images/BfI_comp.png}
 \caption{\(B=f(I)\) pour \(x=\SI{2}{mm}\) et \(x=\SI{3}{mm}\) — courbes théoriques et points mesurés}
 \label{fig:BfI}
 \end{figure}
 
+\paragraph{Commentaire}
+L'induction \(B\) croît avec \(I\) de manière linéaire car \(B\) est proportionnel à \(\Phi\) qui est lui-même proportionnel à \(I\) (\(\Phi_c=N\cdot I\cdot\,P_{eq}\)).
+
+Ce modèle ne tient pas compte de la saturation qui apparaîtrait à partir d'une certaine valeur de \(I\).
+
+(Suite des commentaires dans la section "Partie pratique")
+
+
 \newpage
 \subsection{Inductances propre et mutuelle}
-En négligeant les fuites :
+En remplaçant l'expression du flux $\Phi = \mathcal{P}_{eq} N I$ dans la définition de l'inductance $L = \frac{N\Phi}{I}$, on obtient :
 \[
-L_{11}(x)=\frac{N_1\,\Phi_c}{I}=\frac{2\mu_0 N_1^2 S_g}{3\!\left(x+\dfrac{l_{\mathrm{fer}}}{\mu_r}\right)},
-\qquad
-L_{12}(x)=\frac{N_2\,\Phi_c}{I}=\frac{2\mu_0 N_1 N_2 S_g}{3\!\left(x+\dfrac{l_{\mathrm{fer}}}{\mu_r}\right)}.
+L = \frac{N \Phi}{I} = \frac{N(\mathcal{P}_{eq} N I)}{I} = N^2 \mathcal{P}_{eq}.
 \]
-Le rapport \(L_{12}/L_{11}=N_2/N_1=0.4\) est indépendant de \(x\). Pour de petits entrefers, la saturation réduit \(\mu_r\) effectif et fait décroître \(L_{12}\) en dessous de la valeur linéaire.
 
-\begin{table}[H]
-\centering
-\caption{Valeurs théoriques de référence (\(\frac{l_{\mathrm{fer}}}{\mu_r}=\SI{0.4}{mm}\), \(\mu_r=400\))}
-\begin{tabular}{lcc}
-\toprule
-Entrefer & \(L_{11}\) & \(L_{12}\) \\
-\midrule
-\(x=0\,\mathrm{mm}\)$^*$ & \(\SI{103}{mH}\) & \(\SI{34.6}{mH}\) \\
-\(x=\SI{2}{mm}\)          & \(\SI{14.4}{mH}\) & \(\SI{5.8}{mH}\) \\
-\bottomrule
-\end{tabular}
-\label{tab:L11L12_theo}
-\end{table}
-\noindent\small$^*$ À $x=0$, le modèle linéaire ($\mu_r=400$ constant) sous-estime fortement $L_{12}$ car la perméabilité réelle du matériau est bien supérieure à 400 à faible induction, et les effets de franges augmentent significativement la perméance effective. La valeur mesurée sera donc significativement supérieure à \SI{34.6}{mH}.
+Les inductances propre et mutuelle s'écrivent directement comme le produit du carré (ou du produit) du nombre de spires par la perméance équivalente vue par la bobine :
+\[
+L_{11}(x)=N_1^2\mathcal{P}_{eq}(x),\qquad L_{12}(x)=N_1N_2\mathcal{P}_{eq}(x).
+\]
+Le rapport des deux inductances reste indépendant de l'entrefer \(x\) et vaut :
+\[
+\frac{L_{12}}{L_{11}}=\frac{N_2}{N_1},
+\]
+
+\paragraph{Inductances propre $L_{11}$ et mutuelle $L_{12}$ du montage étudié :}
+\[
+L_{11}(x)=
+\frac{N_1^2}{
+2\mathcal{R}_{\text{jaune}}
++\mathcal{R}_{\text{orange}}
++\frac12\left(2\mathcal{R}_{\text{bleu}}+2\mathcal{R}_{\text{vert}}+\mathcal{R}_{\text{rouge}}\right)
+}
+\]
+
+\[
+L_{12}(x)=
+\frac{N_1N_2}{
+2\mathcal{R}_{\text{jaune}}
++\mathcal{R}_{\text{orange}}
++\frac12\left(2\mathcal{R}_{\text{bleu}}+2\mathcal{R}_{\text{vert}}+\mathcal{R}_{\text{rouge}}\right)
+}
+\]
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{images/L12fx.png}
-\caption{Caractéristique théorique \(L_{12}=f(x)\)}
+\includegraphics[width=0.85\textwidth]{images/L12.png}
+\caption{Caractéristique théorique \(L_{12}=f(x)\) (N1 = 500, N2 = 200)}
 \label{fig:L12fx}
 \end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Valeurs théoriques de l'inductance mutuelle $L_{12}$ pour $\mu_r = 400$}
+\begin{tabular}{cc}
+\toprule
+Entrefer $x$ & $L_{12}$ [mH] \\
+\midrule
+\(\SI{0}{mm}\) & 185 \\
+\(\SI{2}{mm}\) & 7.34 \\
+\bottomrule
+\end{tabular}
+\label{tab:L12_theo}
+\end{table}
+
 
 \subsection{Bobine secondaire en régime alternatif}
 \label{sec:BobSecAC}
