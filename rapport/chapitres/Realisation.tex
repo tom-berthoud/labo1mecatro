@@ -52,8 +52,8 @@ La résistance \(R_1\) est mesurée par les méthodes 2 fils et 4 fils.
 % Bornes
 \fill[red!70] (1,0) circle (4pt);
 \fill[black!70] (3,0) circle (4pt);
-\node[below=5pt, font=\scriptsize, red!70!black] at (1.2,0) {H};
-\node[below=5pt, font=\scriptsize] at (3.2,0) {L};
+\node[below=5pt, font=\scriptsize, red!70!black] at (1.2,0) {HI};
+\node[below=5pt, font=\scriptsize] at (3.2,0) {LO};
 % Fil gauche avec Rfil
 \draw[thick, red!70!black] (1,0) -- (1,-0.6);
 \draw (1,-0.6) to[european resistor, l_=\scriptsize $R_f$] (1,-2.4);
@@ -82,13 +82,15 @@ La résistance \(R_1\) est mesurée par les méthodes 2 fils et 4 fils.
 % Bornes Source I
 \fill[red!70] (0.6,0) circle (4pt);
 \fill[black!70] (1.7,0) circle (4pt);
-\node[below=5pt, font=\scriptsize, red!70!black] at (0.8,0) {H$_I$};
-\node[below=5pt, font=\scriptsize] at (1.9,0) {L$_I$};
+\node[below=5pt, font=\scriptsize, red!70!black] at (0.8,0) {HI};
+\node[below=5pt, font=\scriptsize] at (1.9,0) {LO};
 % Bornes Sense V
 \fill[red!70] (2.9,0) circle (4pt);
 \fill[black!70] (4,0) circle (4pt);
-\node[below=5pt, font=\scriptsize, red!70!black] at (3.2,0) {H$_V$};
-\node[below=5pt, font=\scriptsize] at (4.3,0) {L$_V$};
+\node[below=5pt, font=\scriptsize, red!70!black] at (3.2,0) {HI};
+\node[below=5pt, font=\scriptsize] at (4.3,0) {LO};
+\fill[red!70!black] (0.6,-1.5) circle (2pt);
+\fill (1.7,-2) circle (2pt);
 % Accolades Source / Sense
 % \draw[decorate, decoration={brace, amplitude=4pt, mirror}]
 %   (0.4,2.35) -- (1.9,2.35) node[midway, above=4pt, font=\tiny] {Source $I$};
@@ -98,10 +100,10 @@ La résistance \(R_1\) est mesurée par les méthodes 2 fils et 4 fils.
 \draw[thick, red!70!black] (0.6,0) -- (0.6,-3);
 \draw[thick] (1.7,0) -- (1.7,-3);
 % Fils Sense (tirets) rejoignent les mêmes points
-\draw[thick, dashed, red!70!black] (2.9,0) -- (2.9,-1.5) -- (0.55,-1.5);
-\draw[thick, dashed] (4,0) -- (4,-2) -- (1.7,-2);
+\draw[thick, red!70!black] (2.9,0) -- (2.9,-1.5) -- (0.55,-1.5);
+\draw[thick] (4,0) -- (4,-2) -- (1.7,-2);
 % I=0 entre les fils sense
-\node[font=\tiny, gray] at (3.45,-1.0) {$I\!\approx\!0$};
+
 % Points de contact Kelvin
 \fill (0.6,-3) circle (2.5pt);
 \fill (1.7,-3) circle (2.5pt);
@@ -186,7 +188,7 @@ Une sonde de Hall (teslamètre) est placée dans un entrefer latéral. Une cale 
 }
 \draw[thick] (5.45,0.92) -- (6.96,0.92);
 \draw[thick] (5.45,1.72) -- (6.96,1.72);
-\node[font=\scriptsize, align=center] at (5.72,1.30) {Bobine\\$N_1$};
+\node[font=\scriptsize, align=center] at (5.9,1.30) {Bobine\\$N_1$};
 \node[font=\scriptsize] at (7.32,3) {Noyau E--E};
 % Bloc superieur et boule de reglage
 \filldraw[draw=gray!65!black, fill=gray!15, thick, rounded corners=1pt]
@@ -203,10 +205,19 @@ Une sonde de Hall (teslamètre) est placée dans un entrefer latéral. Une cale 
 \node at (13.75,1.85) {\footnotesize Teslamètre};
 \node at (13.75,1.15) {\footnotesize Hirst GM08};
 \node at (13.75,0.45) {\scriptsize lecture $B$ [mT]};
-% Fil haut : alim -> bobine
-\draw[thick, red!70!black] (3.2,1.72) -- (7.16,1.72);
-\node[font=\scriptsize, above] at (5.15,1.72) {$I$};
-% Fil bas : retour
+% Fil haut
+\draw[thick, red!70!black] 
+(3.2,1.72) -- (7.16,1.72)
+node[midway, above] {$I$}
+node[midway, below] {$\rightarrow$};
+
+\node[circle, fill=red!70!black, inner sep=1.5pt,
+      label=above right:{\scriptsize +}] at (3.2,1.72) {};
+
+\node[circle, fill, inner sep=1.5pt,
+      label=above right:{\scriptsize -}] at (3.2,0.92) {};
+
+% Fil bas
 \draw[thick] (3.2,0.92) -- (7.16,0.92);
 % Sonde Hall (dans l'entrefer lateral droit)
 \draw[thick, yellow!60!black] (12,1.32) -- (11.5,1.32) -- (11.5,2.10) -- (8.70,2.10) -- (8.70,1.32) -- (8.52,1.32);
@@ -280,6 +291,131 @@ e. $x$ & $B(0.5)$ th. [mT] & $B(0.5)$ mes. [mT] & P. th. [mT/A] & P. mes. [mT/A]
 Régler \(f=\SI{35}{Hz}\), viser \(\hat{I}_1\approx\SI{300}{mA}\) crête via l'amplificateur linéaire. Mesures pour \(x=0\) puis \(x=\SI{2}{mm}\).
 
 Grandeurs relevées : \(\hat{U}_1\), \(\hat{I}_1\), déphasage \(\varphi(i_1,u_1)\).
+
+Le montage expérimental utilisé pour les relevés est décrit par le schéma ci-dessous. Le signal est généré à \(\SI{35}{Hz}\) grâce à un générateur de fonctions, puis amplifié via un amplificateur de puissance (A4).
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[european, scale=0.68, transform shape,
+  every node/.style={font=\small}]
+% ---- Alimentation ±30V ----
+\draw[thick, rounded corners=3pt] (3.8,8.5) rectangle (7.2,10.2);
+\node at (5.5,9.6) {\footnotesize Alim. DC $\pm$30V};
+\node at (5.5,9) {\footnotesize PPE-3323};
+\fill[red!70] (4.8,8.5) circle (4pt);
+\fill[black!70] (5.5,8.5) circle (4pt);
+\fill[blue!70] (6.2,8.5) circle (4pt);
+\node[below=4pt, font=\scriptsize, red!70!black] at (4.6,8.5) {$+$};
+\node[below=4pt, font=\scriptsize] at (5.8,8.5) {com};
+\node[below=4pt, font=\scriptsize, blue!70!black] at (6.4,8.5) {$-$};
+% ---- Générateur ----
+\begin{scope}[xshift=-1cm]
+\draw[thick, rounded corners=3pt] (0,5.5) rectangle (2.6,7.3);
+\node at (1.3,6.8) {\footnotesize Générateur};
+\node[font=\large] at (1.3,6.1) {$\sim$};
+\fill[green!60!black] (2.6,6.6) circle (4pt);
+\fill[black!70] (2.6,6) circle (4pt);
+\node[above right=3pt, font=\scriptsize, green!60!black] at (2.6,6.6) {sin};
+\node[below right=3pt, font=\scriptsize] at (2.6,6) {com};
+\end{scope}
+% ---- Amplificateur ----
+\draw[thick, rounded corners=3pt] (3.8,5.5) rectangle (7.2,7.3);
+\node at (5.5,6.8) {\footnotesize Amplificateur};
+\node at (5.5,6.1) {\footnotesize LM12CLK};
+\fill[green!60!black] (3.8,6.6) circle (4pt);
+\node[above left=1pt , font=\scriptsize, green!60!black] at (3.8,6.6) {IN};
+\fill[red!70!black] (7.2,6.6) circle (4pt);
+\node[below=3pt, font=\scriptsize, red!70!black] at (7.6,6.6) {OUT};
+\fill[red!70] (4.8,7.3) circle (4pt);
+\fill[blue!70] (6.2,7.3) circle (4pt);
+\node[above=3pt, font=\scriptsize, red!70!black] at (4.3,7.1) {$+$30V};
+\node[above=3pt, font=\scriptsize, blue!70!black] at (6.7,7.1) {$-$30V};
+\fill[black!70] (5.5,5.5) circle (4pt);
+\node[below=4pt, font=\scriptsize] at (5.8,5.5) {0V};
+% ---- Sonde de courant (inline) ----
+\draw[thick, rounded corners=3pt] (8.5,5.7) rectangle (11.2,7.3);
+\node at (9.85,6.8) {\footnotesize Sonde courant};
+\node at (9.85,6.15) {\scriptsize $\SI{1}{A}/\SI{1}{V}$};
+\fill[black!70] (8.5,6.6) circle (4pt);
+\node[below=3pt, font=\scriptsize] at (8.2,6.6) {IN};
+\fill[black!70] (11.2,6.6) circle (4pt);
+\node[below=3pt, font=\scriptsize] at (11.6,6.6) {OUT};
+\fill[cyan!60!black] (9.85,5.7) circle (4pt);
+\node[below=4pt, font=\scriptsize, cyan!60!black] at (9.55,5.7) {sig};
+% ---- Bobine + noyau detaille (comme schema precedent) ----
+\begin{scope}[xshift=10]
+\filldraw[draw=gray!60!black, fill=gray!20, thick, rounded corners=1pt]
+  (12.8,5.03) rectangle (15.7,5.30);
+\filldraw[draw=gray!60!black, fill=gray!30, thick, rounded corners=1pt]
+  (13.8,5.30) rectangle (14.75,5.50);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (13.30,5.50) rectangle (15.30,5.70);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (13.30,5.70) rectangle (13.48,6.03);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (14.21,5.70) rectangle (14.39,6.03);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (15.12,5.70) rectangle (15.30,6.03);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (13.30,6.70) rectangle (15.30,6.90);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (13.30,6.36) rectangle (13.48,6.70);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (14.21,6.36) rectangle (14.39,6.70);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (15.12,6.36) rectangle (15.30,6.70);
+\filldraw[draw=black, fill=orange!40!brown, thick, rounded corners=1pt]
+  (13.96,5.70) rectangle (14.64,6.70);
+\foreach \y in {5.80,5.92,6.04,6.16,6.28,6.40,6.52,6.64} {
+  \draw[very thick, red!75!black] (13.98,\y) -- (14.62,\y);
+}
+\filldraw[draw=gray!65!black, fill=gray!15, thick, rounded corners=1pt]
+  (13.85,6.90) rectangle (14.70,7.20);
+\filldraw[draw=gray!65!black, fill=gray!45, thick]
+  (14.21,7.20) rectangle (14.35,7.38);
+\filldraw[draw=black, fill=black!90] (14.28,7.60) circle (0.18);
+\node[font=\scriptsize, align=center] at (16,6.20) {Bobine\\$N_1$};
+\node[font=\scriptsize] at (14.30,8) {Noyau E--E};
+\end{scope}
+% ---- Oscilloscope ----
+\draw[thick, rounded corners=3pt] (6.5,1.2) rectangle (11.2,3.2);
+\node at (8.85,2.6) {\footnotesize Oscilloscope DPO2014B};
+\node at (8.85,1.7) {\footnotesize (mode temporel)};
+\fill[yellow!70!black] (7.5,3.2) circle (4pt);
+\fill[cyan!60!black] (9.3,3.2) circle (4pt);
+\node[above=3pt, font=\scriptsize, yellow!70!black] at (7.9,3.2) {CH1};
+\node[above=3pt, font=\scriptsize, cyan!60!black] at (9.7,3.2) {CH2};
+% ==== FILS ====
+% Alim → Ampli
+\draw[thick, red!70!black]  (4.8,8.5) -- (4.8,7.3);
+\draw[thick, blue!70!black] (6.2,8.5) -- (6.2,7.3);
+\draw[thick] (5.5,8.5) -- (5.5,7.8) -- (2.6,7.8) -- (2.6,6);
+% Gen → Ampli
+\draw[thick, green!60!black] (1.6,6.6) -- (3.8,6.6);
+\draw[thick] (1.6,6) -- (3.2,6) -- (3.2,4.9) -- (5.5,4.9);
+% Ampli 0V → ground bus
+\draw[thick] (5.5,5.5) -- (5.5,4.9);
+% Ampli OUT → Sonde IN
+\draw[thick, red!70!black] (7.2,6.6) -- (8.5,6.6);
+% Sonde OUT → Bobine +
+\draw[thick, red!70!black] (11.2,6.6) -- (13.76,6.6);
+
+% Bobine - → return to ground bus
+\draw[thick] (13.76,5.80) -- (12.3,5.80) -- (12.3,4.9) -- (5.5,4.9);
+% Ground bus
+\draw[thick, gray, densely dashed] (3.2,4.9) -- (12.3,4.9);
+
+% CH1 → voltage probe (between Sonde OUT and Bobine +)
+\draw[thick, yellow!70!black, densely dashed] (7.5,3.2) -- (7.5,4) -- (13.0,4) -- (13.0,6.6);
+\filldraw[yellow!70!black] (13.0,6.6) circle (2.5pt);
+
+% CH2 → sonde signal
+\draw[thick, cyan!60!black, densely dashed] (9.3,3.2) -- (9.3,4.5) -- (9.85,4.5) -- (9.85,5.7);
+
+\end{circuitikz}
+\caption{Schéma de mesure de la variation d'amplitude et du déphasage à $\SI{35}{Hz}$.}
+\label{fig:schema_dephasage}
+\end{figure}
 
 \begin{table}[H]
 \centering
@@ -356,6 +492,79 @@ Le diagramme de Bode de la figure~\ref{fig:bode_integ} confirme ce comportement 
 \label{fig:bode_integ}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[european, scale=0.72, transform shape,
+  every node/.style={font=\small}]
+% ---- Alimentation ±30V ----
+\begin{scope}[xshift=1.2cm]
+\draw[thick, rounded corners=3pt] (3.5,8) rectangle (7,9.7);
+\node at (5.25,9.1) {\footnotesize Alim. DC $\pm$30V};
+\node at (5.25,8.4) {\footnotesize PPE-3323};
+\fill[red!70] (4.6,8) circle (4pt);
+\fill[black!70] (5.25,8) circle (4pt);
+\fill[blue!70] (6,8) circle (4pt);
+\node[below=4pt, font=\scriptsize, red!70!black] at (4.3,8.1) {$+$};
+\node[below=4pt, font=\scriptsize] at (5.55,8) {com};
+\node[below=4pt, font=\scriptsize, blue!70!black] at (6.2,8.1) {$-$};
+\end{scope}
+% ---- Générateur ----
+\begin{scope}[xshift=-1cm]
+\draw[thick, rounded corners=3pt] (0,4.5) rectangle (2.6,6.5);
+\node at (1.3,6) {\footnotesize Générateur};
+\node[font=\large] at (1.3,5.2) {$\sim$};
+\fill[green!60!black] (2.6,5.8) circle (4pt);
+\fill[black!70] (2.6,5.1) circle (4pt);
+\node[above right=3pt, font=\scriptsize] at (2.6,5.1) {com};
+\node[above right=3pt, font=\scriptsize, green!60!black] at (2.6,5.8) {sin};
+\end{scope}
+% ---- Intégrateur (box) ----
+\draw[thick, rounded corners=3pt] (4.5,4.2) rectangle (8.5,6.8);
+\node at (6.5,6.2) {\footnotesize Intégrateur};
+\node at (6.5,5.4) {\scriptsize $R_9,\,R_{10},\,R_{11},\,C$};
+\fill[green!60!black] (4.5,5.8) circle (4pt);
+\node[above left=3pt, font=\scriptsize, green!60!black] at (4.5,5.8) {IN};
+\fill[black!70] (4.5,4.8) circle (4pt);
+\node[above left=3pt, font=\scriptsize] at (4.6,4.8) {GND};
+\fill[red!70!black] (8.5,5.8) circle (4pt);
+\node[above right=3pt, font=\scriptsize, red!70!black] at (8.5,5.8) {OUT};
+\fill[red!70] (5.8,6.8) circle (4pt);
+\fill[blue!70] (7.2,6.8) circle (4pt);
+\node[above left=-1pt and 2pt, font=\scriptsize, red!70!black] at (5.8,6.8) {$+V_{cc}$};
+\node[above right=-1pt and 2pt, font=\scriptsize, blue!70!black] at (7.2,6.8) {$-V_{cc}$};
+% ---- Oscilloscope ----
+\draw[thick, rounded corners=3pt] (3,1) rectangle (8,3);
+\node at (5.5,2.4) {\footnotesize Oscilloscope DPO2014B};
+\node at (5.5,1.5) {\footnotesize (balayage fréquentiel)};
+\fill[yellow!70!black] (4.2,3) circle (4pt);
+\fill[cyan!60!black] (6.8,3) circle (4pt);
+\node[above right=3pt, font=\scriptsize, yellow!70!black] at (4.2,3) {CH1};
+\node[above right=3pt, font=\scriptsize, cyan!60!black] at (6.8,3) {CH2};
+% ==== FILS ====
+% Alim → Intégrateur
+\draw[thick, red!70!black] (5.8,8) -- (5.8,6.8);
+\draw[thick, blue!70!black] (7.2,8) -- (7.2,6.8);
+% Gen → Intégrateur IN
+\draw[thick, green!60!black] (1.6,5.8) -- (4.5,5.8);
+% Gen com → Intégrateur GND
+\draw[thick] (1.6,5.1) -- (3.4,5.1) -- (3.4,4.8) -- (4.5,4.8);
+\draw[thick] (2.8,5.1) -- (2.8,7.5) -- (6.45,7.5) -- (6.45,8);
+\fill[black!70] (2.8,5.1) circle (4pt);
+% CH1 → input (probe at gen/integ junction)
+\draw[thick, yellow!70!black, densely dashed] (4.2,3) -- (4.2,3.7) -- (3.6,3.7) -- (3.6,5.8);
+\filldraw[yellow!70!black] (3.6,5.8) circle (2.5pt);
+
+% CH2 → output
+\draw[thick, cyan!60!black, densely dashed] (6.8,3) -- (6.8,3.7) -- (9,3.7) -- (9,5.8);
+\filldraw[cyan!60!black] (9,5.8) circle (2.5pt);
+
+% Intégrateur OUT → CH2 probe
+\draw[thick, red!70!black] (8.5,5.8) -- (9,5.8);
+\end{circuitikz}
+\caption{Schéma de mesure du diagramme de Bode de l'intégrateur.}
+\label{fig:schema_bode_mesure}
+\end{figure}
+
 \subsection{Diagramme B-H en mode \texorpdfstring{\(x-y\)}{x-y} et estimation de \texorpdfstring{\(L_{12}\)}{L12}}
 
 Sur l'oscilloscope en mode \(x-y\) :
@@ -363,6 +572,180 @@ Sur l'oscilloscope en mode \(x-y\) :
 \item axe \(x\) : sonde de courant (pince ampèremétrique, \(\SI{1}{A}=\SI{1}{V}\)), image directe de \(i_1(t)\) ;
 \item axe \(y\) : sortie de l'intégrateur, proportionnelle au flux totalisé \(\Psi_2(t)=\int u_2\,dt\).
 \end{itemize}
+
+Ce branchement permet d'obtenir la figure de Lissajous obtenue ci-dessous.
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[european, scale=0.62, transform shape,
+  every node/.style={font=\small}]
+% ---- Alimentation 1 ±30V (pour ampli) ----
+\begin{scope}[yshift=10]
+  
+\draw[thick, rounded corners=3pt] (3.5,11) rectangle (7,12.7);
+\node at (5.25,12.1) {\footnotesize Alim. DC $\pm$30V};
+\node at (5.25,11.4) {\footnotesize (amplificateur)};
+\fill[red!70] (4.3,11) circle (4pt);
+\fill[black!70] (5.25,11) circle (4pt);
+\fill[blue!70] (6.2,11) circle (4pt);
+\node[below left=4pt, font=\scriptsize, red!70!black] at (4.3,11) {$+$};
+\node[below=4pt, font=\scriptsize] at (5.65,11) {com};
+\node[below right=4pt, font=\scriptsize, blue!70!black] at (6.2,11) {$-$};
+\end{scope}
+
+% ---- Générateur ----
+\begin{scope}[xshift=-1cm]
+\draw[thick, rounded corners=3pt] (0,7.5) rectangle (2.6,9.5);
+\node at (1.3,9) {\footnotesize Générateur};
+\node[font=\large] at (1.3,8.2) {$\sim$};
+\fill[green!60!black] (2.6,8.8) circle (4pt);
+\fill[black!70] (2.6,8.1) circle (4pt);
+\node[above right=3pt, font=\scriptsize, green!60!black] at (2.6,8.8) {sin};
+\node[below right=3pt, font=\scriptsize] at (2.6,8.1) {com};
+\end{scope}
+% ---- Amplificateur ----
+\draw[thick, rounded corners=3pt] (3.5,7.5) rectangle (7,9.5);
+\node at (5.25,9) {\footnotesize Amplificateur};
+\node at (5.25,8.2) {\footnotesize LM12CLK};
+\fill[green!60!black] (3.5,8.8) circle (4pt);
+\node[above left=3pt, font=\scriptsize, green!60!black] at (3.6,8.8) {IN};
+\fill[red!70!black] (7,8.8) circle (4pt);
+\node[above right=3pt, font=\scriptsize, red!70!black] at (6.9,8.8) {OUT};
+\fill[red!70] (4.3,9.5) circle (4pt);
+\fill[blue!70] (6.2,9.5) circle (4pt);
+\node[above left=3pt, font=\scriptsize, red!70!black] at (4.3,9.5) {$+$30V};
+\node[above right=3pt, font=\scriptsize, blue!70!black] at (6.2,9.5) {$-$30V};
+\fill[black!70] (5.25,7.5) circle (4pt);
+\node[below right=4pt, font=\scriptsize] at (5.25,7.5) {0V};
+% ---- Sonde de courant (inline) ----
+\draw[thick, rounded corners=3pt] (8.2,7.8) rectangle (10.8,9.5);
+\node at (9.5,9) {\footnotesize Sonde courant};
+\node at (9.5,8.3) {\scriptsize $\SI{1}{A}/\SI{1}{V}$};
+\fill[black!70] (8.2,8.8) circle (4pt);
+\node[below left=3pt, font=\scriptsize] at (8.3,8.8) {IN};
+\fill[black!70] (10.8,8.8) circle (4pt);
+\node[above right=3pt, font=\scriptsize] at (10.6,8.8) {OUT};
+\fill[yellow!60!black] (9.5,7.8) circle (4pt);
+\node[below right=4pt, font=\scriptsize, yellow!60!black] at (9.5,7.8) {signal};
+% ---- Bobine + Noyau E-E (primaire + secondaire) ----
+% E du bas
+\begin{scope}[xshift=10]
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (12.0,7.30) rectangle (14.5,7.55);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (12.0,7.55) rectangle (12.22,7.95);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (13.13,7.55) rectangle (13.37,7.95);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (14.28,7.55) rectangle (14.5,7.95);
+% E du haut
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (12.0,8.95) rectangle (14.5,9.20);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (12.0,8.55) rectangle (12.22,8.95);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (13.13,8.55) rectangle (13.37,8.95);
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (14.28,8.55) rectangle (14.5,8.95);
+% Bobine primaire (jambe centrale, côté gauche)
+\begin{scope}[yshift=0.2cm]
+\filldraw[draw=black, fill=orange!40!brown, thick, rounded corners=1pt]
+  (12.82,7.55) rectangle (13.25,8.55);
+\foreach \y in {7.65,7.78,7.91,8.04,8.17,8.30,8.43} {
+  \draw[very thick, red!75!black] (12.84,\y) -- (13.23,\y);
+}
+
+% Fils primaire (entre jambe gauche et centrale)
+\draw[thick, red!70!black] (11.3,8.40) -- (12.8,8.40);
+\draw[thick] (11.3,7.65) -- (12.8,7.65);
+\node[font=\scriptsize] at (11.7,7.05) {$N_1$};
+\fill[red!70!black] (11.3,8.40) circle (3pt);
+\fill[black!70] (11.3,7.65) circle (3pt);
+\node[font=\scriptsize, above] at (11.3,8.40) {$P_+$};
+\node[font=\scriptsize, below] at (11.3,7.65) {$P_-$};
+% Bobine secondaire (jambe centrale, côté droit)
+\filldraw[draw=black, fill=cyan!30, thick, rounded corners=1pt]
+  (13.25,7.55) rectangle (13.68,8.55);
+\foreach \y in {7.65,7.78,7.91,8.04,8.17,8.30,8.43} {
+  \draw[very thick, blue!50!black] (13.27,\y) -- (13.66,\y);
+}
+
+% Fils secondaire (entre jambe centrale et droite)
+\draw[thick, orange!70!black] (13.7,8.40) -- (15.2,8.40);
+\draw[thick] (13.7,7.65) -- (15.2,7.65);
+\node[font=\scriptsize] at (14.8,7.05) {$N_2$};
+\fill[orange!70!black] (15.3,8.40) circle (3pt);
+\fill[black!70] (15.3,7.65) circle (3pt);
+\node[font=\scriptsize] at (13.25,9.55) {Noyau E--E};
+% Bornes secondaire
+\node[font=\scriptsize, above] at (15.3,8.40) {$S_+$};
+\node[font=\scriptsize, below] at (15.3,7.65) {$S_-$};
+\end{scope}
+
+\end{scope}
+% ---- Intégrateur ----
+\draw[thick, rounded corners=3pt] (17,7.5) rectangle (21.5,9.5);
+\node at (19.25,9) {\footnotesize Intégrateur};
+\node at (19.25,8.2) {\scriptsize $R_9,\,R_{10},\,R_{11},\,C$};
+\fill[orange!70!black] (17,8.8) circle (4pt);
+\node[above left=3pt, font=\scriptsize, orange!70!black] at (17,8.8) {IN};
+\fill[black!70] (17,8) circle (4pt);
+\node[above left=3pt, font=\scriptsize] at (17,8) {GND};
+\fill[red!70!black] (21.5,8.8) circle (4pt);
+\node[above right=3pt, font=\scriptsize] at (21.5,8.8) {OUT};
+\fill[red!70] (18.5,9.5) circle (4pt);
+\fill[blue!70] (20,9.5) circle (4pt);
+\node[above left=3pt, font=\scriptsize, red!70!black] at (18.5,9.5) {$+V_{cc}$};
+\node[above right=3pt, font=\scriptsize, blue!70!black] at (20,9.5) {$-V_{cc}$};
+% ---- Oscilloscope ----
+\draw[thick, rounded corners=3pt] (7,2) rectangle (14.5,4.2);
+\node at (10.75,3.6) {\footnotesize Oscilloscope DPO2014B};
+\node at (10.75,2.6) {\footnotesize (mode $x$-$y$)};
+\fill[yellow!70!black] (8.5,4.2) circle (4pt);
+\fill[cyan!60!black] (12.5,4.2) circle (4pt);
+\node[above right=3pt, font=\scriptsize, yellow!70!black] at (8.5,4.2) {CH1 ($x$)};
+\node[above right=3pt, font=\scriptsize, cyan!60!black] at (12.5,4.2) {CH2 ($y$)};
+% ==== FILS ====
+% Alim1 → Ampli
+\draw[thick, red!70!black] (4.3,11.3) --  (4.3,9.5);
+\draw[thick, blue!70!black] (6.2,11.3) --  (6.2,9.5);
+\draw[thick] (5.25,11.3) --  (5.25,10.7) --  (2.9,10.7) --  (2.9,8.1);
+\fill[] (2.9,8.1) circle (3pt);
+% Alim1 → Intégrateur
+\draw[thick, red!70!black] (4.3,10.2) -- (18.5,10.2) -- (18.5,9.5);
+\draw[thick, blue!70!black] (6.2,10.7) -- (20,10.7) -- (20,9.5);
+\fill[red!70] (4.3,10.2) circle (3pt);
+\fill[blue!70] (6.2,10.7) circle (3pt);
+% Gen → Ampli
+\draw[thick, green!60!black] (1.6,8.8) -- (3.5,8.8);
+\draw[thick] (1.6,8.1) -- (2.9,8.1) -- (2.9,6.8) -- (5.25,6.8);
+% Ampli 0V → ground bus
+\draw[thick] (5.25,7.5) -- (5.25,6.8);
+% Ampli OUT → Sonde IN
+\draw[thick, red!70!black] (7,8.8) -- (8.2,8.8);
+% Sonde OUT → Bobine primaire +
+\draw[thick, red!70!black] (10.8,8.8) -- (11.1,8.8) -- (11.1,8.60) -- (11.6,8.60);
+
+% Bobine primaire - → ground bus
+\draw[thick] (11.6,7.85) -- (11.1,7.85) -- (11.1,6.8) -- (5.25,6.8);
+% Ground bus
+\draw[thick, gray, densely dashed] (3.1,6.8) -- (11.1,6.8);
+
+% Secondaire S+ → Intégrateur IN
+\draw[thick, orange!70!black] (15.7,8.60) -- (16.2,8.60) -- (16.2,8.8) -- (17,8.8);
+% Secondaire S- → Intégrateur GND
+\draw[thick] (15.7,7.85) -- (16.5,7.85) -- (16.5,8) -- (17,8);
+% CH1 (x) ← sonde signal (proportionnel à I₁)
+\draw[thick, yellow!70!black, densely dashed] (8.5,4.2) -- (8.5,5.5) -- (9.5,5.5) -- (9.5,7.8);
+
+% CH2 (y) ← intégrateur OUT (proportionnel à Ψ₂)
+\draw[thick, cyan!60!black, densely dashed] (12.5,4.2) -- (12.5,5.5) -- (22,5.5) -- (22,8.8) -- (21.5,8.8);
+
+\end{circuitikz}
+\caption{Schéma de mesure du mode $x$-$y$.}
+\label{fig:schema_xy}
+\end{figure}
+
 Le tracé obtenu est une image de la boucle \(B\)-\(H\) à facteur d'échelle près.
 
 \paragraph{Variation avec l'entrefer.}
