@@ -32,6 +32,7 @@ Sonde de courant & --- & --- & --- \\
 \label{tab:appareils}
 \end{table}
 
+\newpage
 \subsection{Résistance du primaire}
 
 \subsubsection{Protocole}
@@ -138,7 +139,8 @@ Mesurée (4 fils) & 6.164 & -7.3 \\
 La mesure 4 fils est la plus fiable.
  La valeur mesurée reste proche de la valeur calculée, avec un écart de l'ordre de \(7\,\%\).
 
-\subsubsection{Mesure de l'induction \texorpdfstring{\(B=f(I)\)}{B=f(I)} en DC (4.2)}
+\newpage
+\subsection{Mesure de l'induction \texorpdfstring{\(B=f(I)\)}{B=f(I)} en DC (4.2)}
 
 \subsubsection{Protocole}
 Une sonde de Hall (teslamètre) est placée dans un entrefer latéral. Une cale étalon règle l'entrefer ; elle reste en place dans les deux entrefers pendant toute la mesure. Le courant DC est balayé de \(\SI{0}{A}\) à \(\SI{0.6}{A}\) par pas de \(\SI{0.1}{A}\).
@@ -219,7 +221,7 @@ Une sonde de Hall (teslamètre) est placée dans un entrefer latéral. Une cale 
 
 \begin{table}[H]
 \centering
-\caption{Relevés \(B=f(I)\) — branche montante}
+\caption{Relevés de mesures \(B=f(I)\)}
 \begin{tabular}{ccccccccc}
 \toprule
 \(I\) [A] & 0.0 & 0.1 & 0.2 & 0.3 & 0.4 & 0.5 & 0.6 \\
@@ -239,18 +241,39 @@ Une sonde de Hall (teslamètre) est placée dans un entrefer latéral. Une cale 
 \label{fig:BfI_comp}
 \end{figure}
 
+\begin{table}[H]
+\centering
+\caption{Comparaison des pentes $B=f(I)$ (calculées entre 0.0 et 0.5 A)}
+\begin{tabular}{cccccc}
+\toprule
+e. $x$ & $B(0.5)$ th. [mT] & $B(0.5)$ mes. [mT] & P. th. [mT/A] & P. mes. [mT/A] & Écart [\%] \\
+\midrule
+\(\SI{2}{mm}\) & 58.3 & 45.6 & 116.6 & 91.2 & 21.8 \\
+\(\SI{3}{mm}\) & 39.8 & 28.1 & 79.6  & 56.2 & 29.4 \\
+\bottomrule
+\end{tabular}
+\label{tab:pentes}
+\end{table}
+
 \subsubsection{Commentaire}
 \begin{itemize}
-\item Les deux courbes \(B=f(I)\) sont quasi linéaires sur la plage \(0\)–\(\SI{0.6}{A}\), ce qui confirme l'absence de saturation marquée dans cet intervalle.
-\item Pour un même courant, \(B\) est plus élevé pour \(x=\SI{2}{mm}\) que pour \(x=\SI{3}{mm}\), conformément à la théorie (réluctance d'entrefer plus faible).
-\item La pente de chaque droite représente l'augmentation de l'induction \(B\) lorsque le courant \(I\) 
-augmente. Le rapport des pentes mesurées \(k_{2\mathrm{mm}}/k_{3\mathrm{mm}}\approx88.1/54.2\approx1.63\) 
-montre donc que \(B\) croît plus vite pour \(x=\SI{2}{mm}\) que pour \(x=\SI{3}{mm}\).
- Théoriquement, comme la pente est inversement proportionnelle à \(x+\ell_{\mathrm{fer,eq}}/\mu_r\),
-  on obtient \((3+0.4)/(2+0.4)=3.4/2.4=1.42\), avec \(\mu_r=400\) et \(\ell_{\mathrm{fer,eq}}/\mu_r=0.4\,\mathrm{mm}\).
-  L'écart entre les deux rapports sont proches, ce qui indique que le modèle linéaire est globalement valide.
+\item Les deux courbes \(B=f(I)\) sont quasi linéaires sur la plage \(0\)–\(\SI{0.6}{A}\), ce qui confirme l'absence de saturation dans cet intervalle.
+
+\item Pour un même courant, \(B\) est plus élevé pour \(x=\SI{2}{mm}\) que pour \(x=\SI{3}{mm}\), conformément à la théorie (perméance d'entrefer plus élevée $\Rightarrow$ flux et induction plus élevés).
+
+\item La pente de chaque droite représente l'augmentation de l'induction \(B\) lorsque le courant \(I\) augmente. Comme la perméance est inversement proportionnelle à \(x\), la pente est plus grande pour \(x=\SI{2}{mm}\) que pour \(x=\SI{3}{mm}\).
+
+\item La pente théorique est supérieure à la pente mesurée, avec un écart de l'ordre de \(20\)–\(30\,\%\). Cela peut s'expliquer par :
+\begin{itemize}
+    \item Des fuites de flux non prises en compte dans le modèle qui provoquent une induction plus faible que prévu.
+    \item Les effets de frange dans l’entrefer.
+    \item L’approximation de la perméabilité relative du fer (\(\mu_r = 400\)).
+    \item La différence entre induction moyenne qui part du principe que le flux est parfaitement uniforme dans le fer et l'entrefer (modèle) et mesure locale avec la sonde où l'on a remarqué que le flux n'est pas parfaitement uniforme car d'importantes variation apparaissait suivant où l'on placait la sonde dans l'entrefer .
 \end{itemize}
 
+\end{itemize}
+
+\newpage
 \subsection{Mesures AC primaire-secondaire à \SI{35}{Hz} (4.3)}
 
 \subsubsection{Protocole}
@@ -297,6 +320,7 @@ Quand on augmente l'entrefer, l'inductance diminue. Le circuit s'oppose donc moi
 
 Ces observations sont cohérentes avec la théorie : l'entrefer augmente la réluctance du circuit magnétique, ce qui réduit l'inductance du primaire.
 
+\newpage
 \subsection{Intégrateur à ampli-op et diagramme de Bode}
 
 Le montage intégrateur utilisé pour reconstruire le flux à partir de la tension mesurée est présenté à la figure~\ref{fig:schema_integ}. À partir de ce schéma, on peut établir sa fonction de transfert puis identifier les fréquences caractéristiques qui permettent d'interpréter le diagramme de Bode.
