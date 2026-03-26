@@ -12,8 +12,8 @@ Hadrien :
 - [x] 2.6 Vérif hypothèses et domaine de validité
 - [x] 2.3-4-5-6-7 enlever les lamda et mettre lfer/mur
 - [x] 2.7 Enlever les mesures on est dans la théorie à comparer plus tard
-- [ ] 2.8 Contrôler
-- [ ] 2.9 Contrôler
+- [x] 2.8 Contrôler
+- [x] 2.9 Contrôler
 
 Tom :
 - [ ] 3.2 Controler les numéros et demander à Blatti leur numéro du convertisseur + ajouter la résolution

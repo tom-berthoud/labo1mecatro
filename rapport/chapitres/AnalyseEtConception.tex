@@ -226,6 +226,11 @@ Entrefer $x$ & $L_{12}$ [mH] \\
 \label{tab:L12_theo}
 \end{table}
 
+\paragraph{Saturation}
+Pour de petits entrefers, l’inductance est fortement influencée par la perméabilité du matériau ferromagnétique car la réluctance du circuit magnétique est alors dominée par le noyau. En régime non saturé, la perméabilité relative est élevée et donc l'inductance aussi (proportionnel).
+
+En cas de saturation, la perméabilité du matériau diminue fortement et tend vers celle du vide. La réluctance du noyau augmente donc significativement, ce qui entraîne une diminution de la perméance et donc de l’inductance.
+
 
 \subsection{Bobine secondaire en régime alternatif}
 \label{sec:BobSecAC}
@@ -233,7 +238,9 @@ L'impédance du primaire (secondaire en circuit ouvert) est :
 \[
 Z_1=R_1+j\omega L_{11}, \qquad I_1=\frac{U_1}{R_1+j\omega L_{11}}.
 \]
-Le flux totalisé dans le secondaire est \(\Psi_2=L_{12}I_1\) ; la tension induite vaut :
+Le flux totalisé dans le secondaire est \(\Psi_2=L_{12}I_1\).
+
+La tension induite vaut :
 \[
 U_2=j\omega L_{12}I_1=j\omega L_{12}\frac{U_1}{R_1+j\omega L_{11}}.
 \]
@@ -246,9 +253,10 @@ Cas limites :
   \(I_1\approx U_1/R_1\),\quad
   \(U_2\approx j\omega L_{12}U_1/R_1\) (croît avec \(\omega\)).
 \end{itemize}
-À \SI{35}{Hz}, avec \(L_{11}\approx\SI{10}{mH}\) et \(R_1\approx\SI{6.65}{\ohm}\) : \(\omega L_{11}/R_1\approx0.33\). Le primaire est dans un régime intermédiaire.
 
-Le flux se reconstruit par intégration de la tension secondaire :
+\paragraph{Flux à partir de la tension}
+Le flux totalisé circulant dans l’enroulement secondaire peut être retrouvé par intégration de la tension secondaire :
 \[
 \Psi_2(t)=\int_0^t U_2(\tau)\,d\tau.
 \]
+\newpage
