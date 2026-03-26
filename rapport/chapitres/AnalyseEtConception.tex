@@ -271,11 +271,14 @@ L'impédance du primaire (secondaire en circuit ouvert) est :
 \[
 Z_1=R_1+j\omega L_{11}, \qquad I_1=\frac{U_1}{R_1+j\omega L_{11}}.
 \]
-Le flux totalisé dans le secondaire est \(\Psi_2=L_{12}I_1\).
 
-La tension induite vaut :
+Le flux total lié au secondaire est défini par $\Psi_2 = N_2 \Phi$. En utilisant la définition de l'inductance mutuelle $L_{12} = \frac{N_2 \Phi}{I_1}$, on obtient :
 \[
-U_2=j\omega L_{12}I_1=j\omega L_{12}\frac{U_1}{R_1+j\omega L_{11}}.
+\Psi_2 = L_{12} I_1.
+\]
+
+\[
+U_2 = j \omega \Psi_2 = j\omega L_{12}I_1=j\omega L_{12}\frac{U_1}{R_1+j\omega L_{11}}.
 \]
 Cas limites :
 \begin{itemize}
@@ -288,7 +291,7 @@ Cas limites :
 \end{itemize}
 
 \paragraph{Flux à partir de la tension}
-Le flux totalisé circulant dans l’enroulement secondaire peut être retrouvé par intégration de la tension secondaire :
+Comme $U_2(t) = \frac{d\Psi_2}{dt}$, le flux totalisé circulant dans l’enroulement secondaire peut être retrouvé par intégration de la tension secondaire :
 \[
 \Psi_2(t)=\int_0^t U_2(\tau)\,d\tau.
 \]
