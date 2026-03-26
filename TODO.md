@@ -45,12 +45,6 @@ avis claude :
   - Le schéma simplifié final avec les hypothèses clairement annotées à côté ($\mu_r \to \infty$ puis $\mu_r = 400$)
 - Les hypothèses doivent être **listées explicitement dans le texte juste avant ou après le schéma** (pas dispersées dans le rapport), conformément à la demande §3.2.1.1 de la donnée.
 
----
-
-### 2. Table 6 — Mesures AC à 35 Hz — compléter
-- Le rapport signale lui-même que "le tableau des mesures AC (Table 6) reste à compléter lors de la séance de mesures."
-- **À faire :** compléter la Table 6 avec les mesures réelles ou, si les mesures n'ont pas encore été faites, indiquer clairement que ces valeurs sont manquantes et en expliquer la raison dans un commentaire.
-- La table doit contenir : $\hat{U}_1$, $\hat{I}_1$, $\varphi(i_1, u_1)$ pour $x = 0\,\text{mm}$ et $x = 2\,\text{mm}$ à 35 Hz.
 
 ---
 

@@ -51,8 +51,8 @@ La résistance \(R_1\) est mesurée par les méthodes 2 fils et 4 fils.
 % Bornes
 \fill[red!70] (1,0) circle (4pt);
 \fill[black!70] (3,0) circle (4pt);
-\node[below=5pt, font=\scriptsize, red!70!black] at (1,0) {H};
-\node[below=5pt, font=\scriptsize] at (3,0) {L};
+\node[below=5pt, font=\scriptsize, red!70!black] at (1.2,0) {H};
+\node[below=5pt, font=\scriptsize] at (3.2,0) {L};
 % Fil gauche avec Rfil
 \draw[thick, red!70!black] (1,0) -- (1,-0.6);
 \draw (1,-0.6) to[european resistor, l_=\scriptsize $R_f$] (1,-2.4);
@@ -81,24 +81,24 @@ La résistance \(R_1\) est mesurée par les méthodes 2 fils et 4 fils.
 % Bornes Source I
 \fill[red!70] (0.6,0) circle (4pt);
 \fill[black!70] (1.7,0) circle (4pt);
-\node[below=5pt, font=\scriptsize, red!70!black] at (0.6,0) {H$_I$};
-\node[below=5pt, font=\scriptsize] at (1.7,0) {L$_I$};
+\node[below=5pt, font=\scriptsize, red!70!black] at (0.8,0) {H$_I$};
+\node[below=5pt, font=\scriptsize] at (1.9,0) {L$_I$};
 % Bornes Sense V
 \fill[red!70] (2.9,0) circle (4pt);
 \fill[black!70] (4,0) circle (4pt);
-\node[below=5pt, font=\scriptsize, red!70!black] at (2.9,0) {H$_V$};
-\node[below=5pt, font=\scriptsize] at (4,0) {L$_V$};
+\node[below=5pt, font=\scriptsize, red!70!black] at (3.2,0) {H$_V$};
+\node[below=5pt, font=\scriptsize] at (4.3,0) {L$_V$};
 % Accolades Source / Sense
-\draw[decorate, decoration={brace, amplitude=4pt, mirror}]
-  (0.4,2.35) -- (1.9,2.35) node[midway, above=4pt, font=\tiny] {Source $I$};
-\draw[decorate, decoration={brace, amplitude=4pt, mirror}]
-  (2.7,2.35) -- (4.2,2.35) node[midway, above=4pt, font=\tiny] {Sense $V$};
+% \draw[decorate, decoration={brace, amplitude=4pt, mirror}]
+%   (0.4,2.35) -- (1.9,2.35) node[midway, above=4pt, font=\tiny] {Source $I$};
+% \draw[decorate, decoration={brace, amplitude=4pt, mirror}]
+%   (2.7,2.35) -- (4.2,2.35) node[midway, above=4pt, font=\tiny] {Sense $V$};
 % Fils Source (trait plein)
 \draw[thick, red!70!black] (0.6,0) -- (0.6,-3);
 \draw[thick] (1.7,0) -- (1.7,-3);
 % Fils Sense (tirets) rejoignent les mêmes points
-\draw[thick, dashed, red!70!black] (2.9,0) -- (2.9,-1.5) -- (0.6,-1.5);
-\draw[thick, dashed] (4,0) -- (4,-1.5) -- (1.7,-1.5);
+\draw[thick, dashed, red!70!black] (2.9,0) -- (2.9,-1.5) -- (0.55,-1.5);
+\draw[thick, dashed] (4,0) -- (4,-2) -- (1.7,-2);
 % I=0 entre les fils sense
 \node[font=\tiny, gray] at (3.45,-1.0) {$I\!\approx\!0$};
 % Points de contact Kelvin
@@ -152,25 +152,64 @@ Une sonde de Hall (teslamètre) est placée dans un entrefer latéral. Une cale 
 \node at (1.6,1.85) {\footnotesize Alimentation DC};
 \node at (1.6,1.15) {\footnotesize PPE-3323};
 \node at (1.6,0.45) {\scriptsize $0$--$\SI{0.6}{A}$};
-% Bobine + noyau E-E
-\draw[thick, rounded corners=3pt] (5.5,0) rectangle (9.5,2.5);
-\node at (7.5,1.85) {\footnotesize Bobine $N_1$};
-\node at (7.5,1.15) {\footnotesize Noyau E-E};
-% Entrefer
-\draw[thick, {Latex[length=2mm]}-{Latex[length=2mm]}] (9.9,0.4) -- node[right, font=\scriptsize] {$x$} (9.9,2.1);
+% Support mecanique
+\filldraw[draw=gray!60!black, fill=gray!20, thick, rounded corners=1pt]
+  (6.0,0.15) rectangle (8.9,0.42);
+\filldraw[draw=gray!60!black, fill=gray!30, thick, rounded corners=1pt]
+  (7.0,0.42) rectangle (7.95,0.62);
+% Noyau E-E : deux E empiles (dents verticales face-a-face)
+% --- E du bas (dos en bas, dents vers le haut) ---
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (6.50,0.62) rectangle (8.50,0.82);         % dos horizontal
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (6.50,0.82) rectangle (6.68,1.15);         % dent gauche
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (7.41,0.82) rectangle (7.59,1.15);         % dent centrale
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (8.32,0.82) rectangle (8.50,1.15);         % dent droite
+% --- E du haut (dos en haut, dents vers le bas) ---
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (6.50,1.82) rectangle (8.50,2.02);         % dos horizontal
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (6.50,1.48) rectangle (6.68,1.82);         % dent gauche
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (7.41,1.48) rectangle (7.59,1.82);         % dent centrale
+\filldraw[draw=black, fill=black!82, thick, rounded corners=1pt]
+  (8.32,1.48) rectangle (8.50,1.82);         % dent droite
+% Bobine enroulee autour de la jambe centrale
+\filldraw[draw=black, fill=orange!40!brown, thick, rounded corners=1pt]
+  (7.16,0.82) rectangle (7.84,1.82);
+\foreach \y in {0.92,1.04,1.16,1.28,1.40,1.52,1.64,1.76} {
+  \draw[very thick, red!75!black] (7.18,\y) -- (7.82,\y);
+}
+\draw[thick] (5.45,0.92) -- (6.96,0.92);
+\draw[thick] (5.45,1.72) -- (6.96,1.72);
+\node[font=\scriptsize, align=center] at (5.72,1.30) {Bobine\\$N_1$};
+\node[font=\scriptsize] at (7.32,3) {Noyau E--E};
+% Bloc superieur et boule de reglage
+\filldraw[draw=gray!65!black, fill=gray!15, thick, rounded corners=1pt]
+  (7.05,2.02) rectangle (7.90,2.32);
+\filldraw[draw=gray!65!black, fill=gray!45, thick]
+  (7.41,2.32) rectangle (7.55,2.50);
+\filldraw[draw=black, fill=black!90] (7.48,2.72) circle (0.18);
+% Entrefer (gap vertical entre les dents)
+\draw[thick, {Latex[length=1mm]}-{Latex[length=1mm]}] (8.85,1.15) -- (8.85,1.48);
+\node[font=\scriptsize] at (9.1,1.30) {$x$};
+\node[font=\scriptsize] at (9.35,1.08) {entrefer};
 % Teslamètre
-\draw[thick, rounded corners=3pt] (12,0) rectangle (15.5,2.5);
+\draw[thick, rounded corners=3pt] (12,0) rectangle (15.9,2.5);
 \node at (13.75,1.85) {\footnotesize Teslamètre};
 \node at (13.75,1.15) {\footnotesize Hirst GM08};
 \node at (13.75,0.45) {\scriptsize lecture $B$ [mT]};
 % Fil haut : alim -> bobine
-\draw[thick, red!70!black, -{Latex[length=2.5mm]}] (3.2,1.8) -- (5.5,1.8);
-\node[font=\scriptsize, above] at (4.35,1.8) {$I$};
+\draw[thick, red!70!black] (3.2,1.72) -- (7.16,1.72);
+\node[font=\scriptsize, above] at (5.15,1.72) {$I$};
 % Fil bas : retour
-\draw[thick] (3.2,0.7) -- (5.5,0.7);
-% Sonde Hall
-\draw[thick, dashed, -{Latex[length=2.5mm]}] (12,1.25) -- (9.5,1.25);
-\node[font=\scriptsize, above] at (10.75,1.25) {sonde Hall};
+\draw[thick] (3.2,0.92) -- (7.16,0.92);
+% Sonde Hall (dans l'entrefer lateral droit)
+\draw[thick, yellow!60!black] (12,1.32) -- (11.5,1.32) -- (11.5,2.10) -- (8.70,2.10) -- (8.70,1.32) -- (8.52,1.32);
+\filldraw[draw=black, fill=yellow!60!black, thick] (8.34,1.24) rectangle (8.50,1.40);
+\node[font=\scriptsize, above] at (10.35,2.15) {sonde Hall};
 \end{circuitikz}
 \caption{Schéma de mesure DC --- caractéristique $B=f(I)$.}
 \label{fig:schema_DC}
@@ -360,7 +399,7 @@ Entrefer & \(\Delta y/\Delta x\) & \(L_{12}\) mesuré [mH] & \(L_{12}\) théoriq
 \paragraph{Commentaire sur les écarts.}
 Les valeurs mesurées sont systématiquement supérieures aux prédictions théoriques. Cela s'explique principalement par deux limites du modèle analytique :
 \begin{itemize}
-\item \textbf{Perméabilité sous-estimée.} Le modèle utilise \(\mu_r=400\) constant, ce qui donne \(\lambda=\ell_\mathrm{fer,eq}/\mu_r=\SI{0.4}{mm}\). Or la perméabilité réelle des tôles ferromagnétiques est bien supérieure à faible induction (\(\mu_r\approx 2000\text{--}5000\)). À \(x=0\), l'inductance ne dépend que de \(\lambda\) : si \(\mu_r\) réel est environ 4 fois plus grand, \(\lambda\) est divisé par 4, et \(L_{12}\propto 1/\lambda\) est multiplié par~4, ce qui est cohérent avec le facteur \(\times 4\) observé.
+\item \textbf{Perméabilité sous-estimée.} Le modèle utilise \(\mu_r=400\) constant, ce qui donne \(\frac{l_{\mathrm{fer}}}{\mu_r}=\SI{0.4}{mm}\). Or la perméabilité réelle des tôles ferromagnétiques est bien supérieure à faible induction (\(\mu_r\approx 2000\text{--}5000\)). À \(x=0\), l'inductance ne dépend que de \(\frac{l_{\mathrm{fer}}}{\mu_r}\) : si \(\mu_r\) réel est environ 4 fois plus grand, \(\frac{l_{\mathrm{fer}}}{\mu_r}\) est divisé par 4, et \(L_{12}\propto \frac{\mu_r}{l_{\mathrm{fer}}}\) est multiplié par~4, ce qui est cohérent avec le facteur \(\times 4\) observé.
 \item \textbf{Effets de franges.} Le modèle suppose que le flux est canalisé dans la section géométrique \(S_g\) de l'entrefer. En réalité, le flux déborde sur les bords (fringing), ce qui augmente la section effective et donc la perméance. Cet effet est proportionnellement plus important pour les petits entrefers, ce qui explique que l'écart soit plus grand à \(x=0\) (\(+302\,\%\)) qu'à \(x=\SI{2}{mm}\) (\(+150\,\%\)).
 \end{itemize}
 

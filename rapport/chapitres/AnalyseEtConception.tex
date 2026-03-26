@@ -151,15 +151,15 @@ Induction dans l'entrefer latérale (un coté).
 \subsection{Inductances propre et mutuelle}
 En négligeant les fuites :
 \[
-L_{11}(x)=\frac{N_1\,\Phi_c}{I}=\frac{2\mu_0 N_1^2 S_g}{3(x+\lambda)},
+L_{11}(x)=\frac{N_1\,\Phi_c}{I}=\frac{2\mu_0 N_1^2 S_g}{3\!\left(x+\dfrac{l_{\mathrm{fer}}}{\mu_r}\right)},
 \qquad
-L_{12}(x)=\frac{N_2\,\Phi_c}{I}=\frac{2\mu_0 N_1 N_2 S_g}{3(x+\lambda)}.
+L_{12}(x)=\frac{N_2\,\Phi_c}{I}=\frac{2\mu_0 N_1 N_2 S_g}{3\!\left(x+\dfrac{l_{\mathrm{fer}}}{\mu_r}\right)}.
 \]
 Le rapport \(L_{12}/L_{11}=N_2/N_1=0.4\) est indépendant de \(x\). Pour de petits entrefers, la saturation réduit \(\mu_r\) effectif et fait décroître \(L_{12}\) en dessous de la valeur linéaire.
 
 \begin{table}[H]
 \centering
-\caption{Valeurs théoriques de référence (\(\lambda=\SI{0.4}{mm}\), \(\mu_r=400\))}
+\caption{Valeurs théoriques de référence (\(\frac{l_{\mathrm{fer}}}{\mu_r}=\SI{0.4}{mm}\), \(\mu_r=400\))}
 \begin{tabular}{lcc}
 \toprule
 Entrefer & \(L_{11}\) & \(L_{12}\) \\
