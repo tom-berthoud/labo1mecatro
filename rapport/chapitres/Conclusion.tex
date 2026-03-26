@@ -1,2 +1,43 @@
 \section{Conclusion}
 
+Ce laboratoire a permis d'étudier expérimentalement un circuit magnétique en 
+double~E et de confronter les modèles analytiques aux mesures réelles.
+
+Dans la partie théorique, les expressions des grandeurs magnétiques ont été 
+établies dans deux hypothèses ($\mu_r \to \infty$ et $\mu_r = 400$), ce qui a 
+permis de mettre en évidence l'influence de la perméabilité du fer et de 
+l'entrefer sur le flux, l'induction et les inductances.
+
+Les mesures DC montrent un comportement contrasté. La résistance du primaire 
+est en bon accord avec la théorie, ce qui valide la partie électrique du 
+modèle. En revanche, la caractéristique $B = f(I)$ présente des écarts plus 
+marqués, de l'ordre de $20$ à $30\,\%$, bien que la dépendance à l'entrefer 
+reste correctement prédite. Cette surestimation théorique de $B$ s'explique 
+principalement par les fuites de flux, les effets de frange et la 
+non-uniformité du champ dans l'entrefer, observée lors du déplacement de la 
+sonde Hall dans l'entrefer.
+
+Les mesures AC à $35\,\text{Hz}$ ont confirmé la dépendance de l'inductance 
+vis-à-vis de l'entrefer~: à entrefer nul, le primaire est fortement inductif 
+(déphasage de $73{,}35°$) et nécessite une tension bien plus élevée qu'à 
+$x = 2\,\text{mm}$ (déphasage de $49{,}66°$). Ce comportement est cohérent 
+avec la réduction de réluctance lorsque l'entrefer diminue, conformément à 
+la relation $Z_1 = R_1 + j\omega L_{11}$.
+
+L'estimation de $L_{12}$ par le diagramme $B$-$H$ en mode $x$-$y$ révèle les 
+limites du modèle linéaire~: si l'accord est acceptable à $x = 0\,\text{mm}$ 
+(écart de $-24{,}9\,\%$), il devient insuffisant à $x = 2\,\text{mm}$ 
+($+97{,}5\,\%$). Les effets de frange augmentent significativement la section 
+effective de l'entrefer et donc la perméance réelle, effet non pris en compte 
+dans le modèle analytique. Par ailleurs, la boucle $B$-$H$ observée en mode 
+$x$-$y$ présente une épaisseur non nulle, témoignant de pertes par hystérèse 
+dans le matériau ferromagnétique~; ces pertes s'atténuent lorsque l'entrefer 
+augmente, ce qui est cohérent avec la réduction de l'induction dans le noyau.
+
+En définitive, le modèle à réluctances avec $\mu_r = 400$ donne de bons 
+résultats pour les grandeurs DC mais atteint ses limites pour l'estimation 
+précise des inductances en présence d'entrefer. Pour améliorer la précision 
+des prédictions, il faudrait intégrer un facteur de correction de frange 
+(coefficient de Rogowski) ou recourir à une simulation par éléments finis, 
+qui permettrait de prendre en compte la géométrie réelle du circuit et les 
+non-linéarités du matériau ferromagnétique.

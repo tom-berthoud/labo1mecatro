@@ -16,7 +16,7 @@ L'objectif est de vérifier expérimentalement les modèles théoriques de la se
 \centering
 \caption{Instruments de mesure et numéros d'inventaire HEIG-VD}
 \small
-\begin{tabular}{@{}p{0.18\textwidth}p{0.19\textwidth}p{0.14\textwidth}p{0.15\textwidth}p{0.26\textwidth}@{}}
+\begin{tabular}{@{}p{0.3\textwidth}p{0.3\textwidth}p{0.14\textwidth}p{0.15\textwidth}p{0.26\textwidth}@{}}
 \toprule
 Appareil & Modèle & S/N & Inventaire \\
 \midrule
@@ -259,8 +259,8 @@ node[midway, below] {$\rightarrow$};
 \toprule
 e. $x$ & $B(0.5)$ th. [mT] & $B(0.5)$ mes. [mT] & P. th. [mT/A] & P. mes. [mT/A] & Écart [\%] \\
 \midrule
-\(\SI{2}{mm}\) & 58.3 & 45.6 & 116.6 & 91.2 & 21.8 \\
-\(\SI{3}{mm}\) & 39.8 & 28.1 & 79.6  & 56.2 & 29.4 \\
+\(\SI{2}{mm}\) & 58.3 & 45.6 & 116.6 & 91.2 & -21.8 \\
+\(\SI{3}{mm}\) & 39.8 & 28.1 & 79.6  & 56.2 & -29.4 \\
 \bottomrule
 \end{tabular}
 \label{tab:pentes}
@@ -274,7 +274,7 @@ e. $x$ & $B(0.5)$ th. [mT] & $B(0.5)$ mes. [mT] & P. th. [mT/A] & P. mes. [mT/A]
 
 \item La pente de chaque droite représente l'augmentation de l'induction \(B\) lorsque le courant \(I\) augmente. Comme la perméance est inversement proportionnelle à \(x\), la pente est plus grande pour \(x=\SI{2}{mm}\) que pour \(x=\SI{3}{mm}\).
 
-\item La pente théorique est supérieure à la pente mesurée, avec un écart de l'ordre de \(20\)–\(30\,\%\). Cela peut s'expliquer par :
+\item La pente théorique est supérieure à la pente mesurée, avec un écart de l'ordre de \(20\)–\(30\,\%\). Le modèle reproduit correctement la tendance générale, mais surestime l'induction mesurée. Cela peut s'expliquer par :
 \begin{itemize}
     \item Des fuites de flux non prises en compte dans le modèle qui provoquent une induction plus faible que prévu.
     \item Les effets de frange dans l’entrefer.
@@ -796,18 +796,18 @@ d'où :
 \toprule
 Entrefer & \(\Delta y/\Delta x\) & \(L_{12}\) mesuré [mH] & \(L_{12}\) théorique [mH] & Écart [\%] \\
 \midrule
-\(x=\SI{0}{mm}\) & 13.9 & 139 & 34.6 & $+302$ \\
-\(x=\SI{2}{mm}\)          & 1.45 & 14.5 & 5.8  & $+150$ \\
+\(x=\SI{0}{mm}\) & 13.9 & 139 & 185 & $-24{,}9$ \\
+\(x=\SI{2}{mm}\) & 1.45 & 14.5 & 7.34 & $+97{,}5$ \\
 \bottomrule
 \end{tabular}
 \label{tab:L12_mes}
 \end{table}
 
 \paragraph{Commentaire sur les écarts.}
-Les valeurs mesurées sont systématiquement supérieures aux prédictions théoriques. Cela s'explique principalement par deux limites du modèle analytique :
+L'accord théorie/mesure dépend fortement de l'entrefer. À \(x=0\), la valeur mesurée reste du bon ordre de grandeur mais demeure inférieure à la prédiction théorique, ce qui peut s'expliquer par une perméabilité effective plus faible que celle supposée localement, notamment sous l'effet de la saturation. À \(x=\SI{2}{mm}\), la mesure devient en revanche presque deux fois plus grande que la valeur théorique. Cela s'explique principalement par deux limites du modèle analytique :
 \begin{itemize}
-\item \textbf{Perméabilité sous-estimée.} Le modèle utilise \(\mu_r=400\) constant, ce qui donne \(\frac{l_{\mathrm{fer}}}{\mu_r}=\SI{0.4}{mm}\). Or la perméabilité réelle des tôles ferromagnétiques est bien supérieure à faible induction (\(\mu_r\approx 2000\text{--}5000\)). À \(x=0\), l'inductance ne dépend que de \(\frac{l_{\mathrm{fer}}}{\mu_r}\) : si \(\mu_r\) réel est environ 4 fois plus grand, \(\frac{l_{\mathrm{fer}}}{\mu_r}\) est divisé par 4, et \(L_{12}\propto \frac{\mu_r}{l_{\mathrm{fer}}}\) est multiplié par~4, ce qui est cohérent avec le facteur \(\times 4\) observé.
-\item \textbf{Effets de franges.} Le modèle suppose que le flux est canalisé dans la section géométrique \(S_g\) de l'entrefer. En réalité, le flux déborde sur les bords (fringing), ce qui augmente la section effective et donc la perméance. Cet effet est proportionnellement plus important pour les petits entrefers, ce qui explique que l'écart soit plus grand à \(x=0\) (\(+302\,\%\)) qu'à \(x=\SI{2}{mm}\) (\(+150\,\%\)).
+\item \textbf{Saturation et perméabilité non constante.} Le modèle suppose \(\mu_r=400\) constant, alors que la perméabilité réelle varie avec le point de fonctionnement. À faible entrefer, le circuit magnétique travaille plus près de la saturation, ce qui réduit la perméabilité effective et peut faire baisser \(L_{12}\) mesuré par rapport à la valeur théorique calculée en régime linéaire.
+\item \textbf{Effets de franges.} Le modèle suppose que le flux est canalisé dans la section géométrique \(S_g\) de l'entrefer. En réalité, le flux déborde sur les bords, ce qui augmente la section effective et donc la perméance. Cet effet devient particulièrement sensible dès qu'un entrefer est présent, ce qui explique que la mesure à \(x=\SI{2}{mm}\) (\(+97{,}5\,\%\)) soit nettement supérieure à la prédiction théorique.
 \end{itemize}
 
 \subsection{Synthèse — comparaison théorie / mesure}
@@ -822,14 +822,14 @@ Les valeurs mesurées sont systématiquement supérieures aux prédictions théo
 Grandeur & Théorie & Mesure & Écart & Référence \\
 \midrule
 \(R_1\) [\si{\ohm}] & 6.65 & 6.164 & $-7{,}3\,\%$ & Table~\ref{tab:R1_mes} \\
-\(B\) à \(I=\SI{0.5}{A}\), \(x=\SI{2}{mm}\) [mT] & 43.6 & 45.6 & $+4{,}6\,\%$ & Tab.~\ref{tab:Bmes_mont}, Fig.~\ref{fig:BfI_comp} \\
-\(B\) à \(I=\SI{0.5}{A}\), \(x=\SI{3}{mm}\) [mT] & 30.8 & 28.1 & $-8{,}7\,\%$ & Tab.~\ref{tab:Bmes_mont}, Fig.~\ref{fig:BfI_comp} \\
-\(L_{12}\) à \(x=\SI{0}{mm}\) [mH] & 34.6 & 139 & $+302\,\%$ & Tab.~\ref{tab:L12_mes}, Fig.~\ref{fig:BH_xy} \\
-\(L_{12}\) à \(x=\SI{2}{mm}\) [mH] & 5.8 & 14.5 & $+150\,\%$ & Tab.~\ref{tab:L12_mes}, Fig.~\ref{fig:BH_xy} \\
+\(B\) à \(I=\SI{0.5}{A}\), \(x=\SI{2}{mm}\) [mT] & 58.3 & 45.6 & $-21{,}8\,\%$ & Tab.~\ref{tab:Bmes_mont}, Fig.~\ref{fig:BfI_comp} \\
+\(B\) à \(I=\SI{0.5}{A}\), \(x=\SI{3}{mm}\) [mT] & 39.8 & 28.1 & $-29{,}4\,\%$ & Tab.~\ref{tab:Bmes_mont}, Fig.~\ref{fig:BfI_comp} \\
+\(L_{12}\) à \(x=\SI{0}{mm}\) [mH] & 185 & 139 & $-24{,}9\,\%$ & Tab.~\ref{tab:L12_mes}, Fig.~\ref{fig:BH_xy} \\
+\(L_{12}\) à \(x=\SI{2}{mm}\) [mH] & 7.34 & 14.5 & $+97{,}5\,\%$ & Tab.~\ref{tab:L12_mes}, Fig.~\ref{fig:BH_xy} \\
 \bottomrule
 \end{tabular}
 }
 \label{tab:comparaison}
 \end{table}
 
-\noindent Les mesures DC ($R_1$ et $B$) présentent des écarts inférieurs à $10\,\%$, ce qui valide le modèle à réluctances pour ces grandeurs. En revanche, l'inductance mutuelle $L_{12}$ est nettement sous-estimée par le modèle théorique à $\mu_r=400$, principalement en raison de la perméabilité réelle bien supérieure et des effets de franges (cf.~commentaire p.~\pageref{tab:L12_mes}).
+\noindent La résistance DC \(R_1\) est en bon accord avec la théorie, alors que les mesures d'induction \(B\) montrent des écarts plus marqués, de l'ordre de \(20\) à \(30\,\%\), tout en conservant la bonne tendance en fonction de l'entrefer. Pour l'inductance mutuelle \(L_{12}\), l'accord devient plus contrasté : à \(x=0\), la théorie surestime modérément la mesure, tandis qu'à \(x=\SI{2}{mm}\) elle la sous-estime fortement. Cela montre que le modèle linéaire reste sensible aux hypothèses faites sur la perméabilité et ne prend pas correctement en compte l'ensemble des effets réels du circuit magnétique, notamment les fuites et les effets de franges (cf.~commentaire p.~\pageref{tab:L12_mes}).
