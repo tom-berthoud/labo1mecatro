@@ -415,6 +415,7 @@ Le montage expérimental utilisé pour les relevés est décrit par le schéma c
 \label{fig:schema_dephasage}
 \end{figure}
 
+\subsubsection{Résultats}
 \begin{table}[H]
 \centering
 \caption{Mesures AC de référence à \SI{35}{Hz}}
@@ -563,6 +564,7 @@ Le diagramme de Bode de la figure~\ref{fig:bode_integ} confirme ce comportement 
 \label{fig:schema_bode_mesure}
 \end{figure}
 
+\newpage
 \subsection{Diagramme B-H en mode \texorpdfstring{\(x-y\)}{x-y} et estimation de \texorpdfstring{\(L_{12}\)}{L12}}
 
 Sur l'oscilloscope en mode \(x-y\) :
@@ -570,8 +572,6 @@ Sur l'oscilloscope en mode \(x-y\) :
 \item axe \(x\) : sonde de courant (pince ampèremétrique, \(\SI{1}{A}=\SI{1}{V}\)), image directe de \(i_1(t)\) ;
 \item axe \(y\) : sortie de l'intégrateur, proportionnelle au flux totalisé \(\Psi_2(t)=\int u_2\,dt\).
 \end{itemize}
-
-Ce branchement permet d'obtenir la figure de Lissajous obtenue ci-dessous.
 
 \begin{figure}[H]
 \centering
@@ -744,69 +744,140 @@ Ce branchement permet d'obtenir la figure de Lissajous obtenue ci-dessous.
 \label{fig:schema_xy}
 \end{figure}
 
-Le tracé obtenu est une image de la boucle \(B\)-\(H\) à facteur d'échelle près.
-
-\paragraph{Variation avec l'entrefer.}
-En augmentant \(x\), la boucle s'allonge horizontalement (courant plus grand pour un même flux) et s'amincit (pertes hystérétiques plus faibles). La pente de la droite centrale est proportionnelle à \(L_{12}\).
-
-\paragraph{Conversion volt \(\to\) weber sur l'axe \(y\).}
-La tension induite au secondaire est \(U_2=j\omega L_{12}I_1\) et le flux totalisé vaut \(\Psi_2=L_{12}I_1\). En domaine de Laplace, l'intégration donne \(\Psi_2(s)=U_2(s)/s\). La sortie de l'intégrateur à ampli-op est :
-\[
-V_\mathrm{out}=H(j\omega)\cdot U_2
-=\frac{-1}{j\omega R_9 C}\cdot j\omega L_{12}I_1
-=\frac{-L_{12}\,I_1}{R_9\,C},
-\]
-car les termes \(j\omega\) se simplifient à \(\SI{35}{Hz}\gg f_c\). La sortie de l'intégrateur est donc directement proportionnelle au flux, avec le facteur de conversion :
-\[
-\boxed{1\,\text{V en }y = R_9\,C = 10^4\times10^{-6}=\SI{0.01}{Wb}=\SI{10}{mWb}.}
-\]
-
-\paragraph{Estimation de \(L_{12}\) par la pente.}
-Sur l'axe \(x\), la pince ampèremétrique donne \(V_x=1\cdot I_1\) (lecture directe en ampères). La pente du diagramme \(x\)-\(y\) s'écrit :
-\[
-\frac{\Delta y}{\Delta x}=\frac{V_\mathrm{out}}{V_x}=\frac{L_{12}/(R_9\,C)}{I_1/I_1}=\frac{L_{12}}{R_9\,C},
-\]
-d'où :
-\[
-\boxed{L_{12}=\frac{\Delta y}{\Delta x}\cdot R_9\,C=\frac{\Delta y}{\Delta x}\times\SI{0.01}{H}.}
-\]
-
 \begin{figure}[H]
 \centering
-\begin{minipage}[t]{0.48\textwidth}
+
+\begin{minipage}{0.6\textwidth}
 \centering
 \includegraphics[width=\textwidth]{images/TEK00005.PNG}
 \caption*{\(x=0\,\mathrm{mm}\), \(\Delta x=\SI{250}{mV}\), \(\Delta y=\SI{3.48}{V}\)}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\begin{minipage}{0.6\textwidth}
 \centering
 \includegraphics[width=\textwidth]{images/TEK00004.PNG}
 \caption*{\(x=\SI{2}{mm}\), \(\Delta x=\SI{470}{mV}\), \(\Delta y=\SI{680}{mV}\)}
 \end{minipage}
+
 \caption{Boucles \(B\)-\(H\) en mode \(x\)-\(y\) avec curseurs \(\Delta\) (mesure de \(L_{12}\))}
 \label{fig:BH_xy}
 \end{figure}
 
+\paragraph{Variation avec l'entrefer.}
+En augmentant \(x\) et maintenant le courant constant, le flux diminue et la courbe s'amincit (pertes hystérétiques plus faibles). 
+La pente de la droite centrale est proportionnelle à \(L_{12}\) donc l'inductance diminue.
+
+\paragraph{Conversion volt \(\to\) weber sur l'axe \(y\).}
+La tension induite au secondaire vérifie :
+\[
+U_2 = \frac{d\Psi_2}{dt},
+\]
+où \(\Psi_2\) désigne le flux lié (flux totalisé). En régime sinusoïdal, on obtient :
+\[
+U_2 = j\omega \Psi_2.
+\]
+
+
+La tension induite au secondaire vérifie :
+\[
+U_2 = \frac{d\Psi_2}{dt}.
+\]
+
+En régime sinusoïdal :
+\[
+U_2 = j\omega \Psi_2
+\quad \Rightarrow \quad
+\Psi_2 = \frac{U_2}{j\omega}.
+\]
+
+Un intégrateur idéal possède une fonction de transfert :
+\[
+H(j\omega) = \frac{1}{j\omega}
+\quad \Rightarrow \quad
+|H(j\omega)| = \frac{1}{\omega}.
+\]
+
+À la fréquence \(f = 35\,\mathrm{Hz}\), on obtient :
+\[
+\frac{1}{\omega} = \frac{1}{2\pi f}
+= \frac{1}{2\pi \cdot 35}
+\approx 4.54 \times 10^{-3}.
+\]
+
+Cependant, le diagramme de Bode de l’intégrateur réel montre une atténuation d’environ \(-6.85\,\mathrm{dB}\), soit un facteur :
+\[
+10^{-6.85/20} \approx 0.45 \simeq 0.5.
+\]
+
+Ainsi, le gain réel de l’intégrateur est réduit d’un facteur \(\approx 0.5\). Pour corriger cette atténuation, il convient de diviser par ce facteur. On obtient alors :
+\[
+\Psi_2 \approx \frac{1}{0.5} \cdot \frac{1}{\omega} \, U_2
+\approx \frac{4.54 \times 10^{-3}}{0.5} \, U_2.
+\]
+
+Ainsi, la conversion volt--weber est donnée par :
+\[
+1\,\mathrm{V} \;\widehat{=}\; \frac{4.54 \times 10^{-3}}{0.5}
+\approx 9.1 \times 10^{-3}\ \mathrm{Wb}.
+\]
+
+\paragraph{Estimation de \(L_{12}\) par la pente.}
+Sur l’axe \(x\), la pince ampèremétrique donne directement :
+\[
+V_x = I_1 \quad (1\,\mathrm{V} = 1\,\mathrm{A}).
+\]
+
+Sur l’axe \(y\), la tension de sortie de l’intégrateur est proportionnelle au flux lié :
+\[
+\Psi_2 \approx \frac{4.54\times10^{-3}}{0.5}\, V_{\mathrm{out}}
+\approx 9.1\times10^{-3}\, V_{\mathrm{out}}.
+\]
+
+La pente du diagramme \(x\)-\(y\) correspond donc à :
+\[
+\frac{\Delta y}{\Delta x}
+=
+\frac{\Psi_2}{I_1}
+= L_{12}.
+\]
+
+On en déduit directement :
+\[
+\boxed{
+L_{12} \approx \frac{\Delta y}{\Delta x}
+}
+\]
+
+avec la conversion :
+\[
+y = \Psi_2 \approx 9.1\times10^{-3}\, V_{\mathrm{out}}.
+\]
+
+\subsubsection{Résultats}
 \begin{table}[H]
 \centering
-\caption{Estimation de \(L_{12}\) à partir de la pente du diagramme \(x\)-\(y\)}
+\caption{Estimation corrigée de \(L_{12}\) à partir de la pente du diagramme \(x\)-\(y\)}
 \begin{tabular}{lcccc}
 \toprule
 Entrefer & \(\Delta y/\Delta x\) & \(L_{12}\) mesuré [mH] & \(L_{12}\) théorique [mH] & Écart [\%] \\
 \midrule
-\(x=\SI{0}{mm}\) & 13.9 & 139 & 185 & $-24{,}9$ \\
-\(x=\SI{2}{mm}\) & 1.45 & 14.5 & 7.34 & $+97{,}5$ \\
+\(x=\SI{0}{mm}\) & 13.92 & 126.4 & 185 & \(-31.7\) \\
+\(x=\SI{2}{mm}\) & 1.45  & 13.1  & 7.34 & \(+79.0\) \\
 \bottomrule
 \end{tabular}
-\label{tab:L12_mes}
+\label{tab:L12_mes_corr}
 \end{table}
 
-\paragraph{Commentaire sur les écarts.}
-L'accord théorie/mesure dépend fortement de l'entrefer. À \(x=0\), la valeur mesurée reste du bon ordre de grandeur mais demeure inférieure à la prédiction théorique, ce qui peut s'expliquer par une perméabilité effective plus faible que celle supposée localement, notamment sous l'effet de la saturation. À \(x=\SI{2}{mm}\), la mesure devient en revanche presque deux fois plus grande que la valeur théorique. Cela s'explique principalement par deux limites du modèle analytique :
-\begin{itemize}
-\item \textbf{Saturation et perméabilité non constante.} Le modèle suppose \(\mu_r=400\) constant, alors que la perméabilité réelle varie avec le point de fonctionnement. À faible entrefer, le circuit magnétique travaille plus près de la saturation, ce qui réduit la perméabilité effective et peut faire baisser \(L_{12}\) mesuré par rapport à la valeur théorique calculée en régime linéaire.
-\item \textbf{Effets de franges.} Le modèle suppose que le flux est canalisé dans la section géométrique \(S_g\) de l'entrefer. En réalité, le flux déborde sur les bords, ce qui augmente la section effective et donc la perméance. Cet effet devient particulièrement sensible dès qu'un entrefer est présent, ce qui explique que la mesure à \(x=\SI{2}{mm}\) (\(+97{,}5\,\%\)) soit nettement supérieure à la prédiction théorique.
-\end{itemize}
+\subsubsection{Commentaire}
+Les résultats montrent que l’inductance mutuelle \(L_{12}\) diminue fortement lorsque l’entrefer augmente, ce qui est conforme au comportement attendu du circuit magnétique : l’augmentation de l’entrefer accroît la réluctance et réduit donc le couplage magnétique.
+
+Cependant, des écarts sont observés entre les valeurs mesurées et théoriques. Pour \(x=\SI{0}{mm}\), l’inductance est sous-estimée d’environ \(32\,\%\), tandis que pour \(x=\SI{2}{mm}\), elle est surestimée d’environ \(79\,\%\).
+
+Ces écarts peuvent s’expliquer par plusieurs facteurs. D’une part, l’intégrateur utilisé n’est pas idéal : malgré la correction apportée à partir du diagramme de Bode, une incertitude subsiste sur le facteur de conversion volt--weber. D’autre part, la mesure de la pente reste sensible au bruit et à la précision des curseurs, en particulier lorsque la pente est faible (cas de \(x=\SI{2}{mm}\)). Enfin, les hypothèses du modèle théorique (champ uniforme, absence de fuites de flux, linéarité du matériau) ne sont pas parfaitement vérifiées en pratique, ce qui contribue également aux écarts observés.
+
+Malgré ces différences quantitatives, les résultats expérimentaux reproduisent correctement la tendance physique attendue.
 
 \subsection{Synthèse — comparaison théorie / mesure}
 
